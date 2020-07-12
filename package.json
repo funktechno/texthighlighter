@@ -1,6 +1,6 @@
 {
   "name": "@funktechno/texthighlighter",
-  "version": "1.0.3",
+  "version": "2.0.0",
   "description": "* a typescript port of https://github.com/mir3z/texthighlighter",
   "main": "index.js",
   "files": [
@@ -21,7 +21,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lastlink/texthighlighter.git"
+    "url": "git+https://github.com/funktechno/texthighlighter.git"
   },
   "keywords": [
     "typescript",
@@ -31,9 +31,9 @@
   "author": "lastlink",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/lastlink/texthighlighter/issues"
+    "url": "https://github.com/funktechno/texthighlighter/issues"
   },
-  "homepage": "https://github.com/lastlink/texthighlighter#readme",
+  "homepage": "https://github.com/funktechno/texthighlighter#readme",
   "devDependencies": {
     "@types/eslint": "^6.1.8",
     "@typescript-eslint/eslint-plugin": "^2.24.0",
