@@ -63,6 +63,7 @@ class paramsImp {
 interface hlDescriptorI {
   wrapper: string;
   textContent: string;
+  color: string;
   hlpaths?: number[];
   path: string;
   offset: number;

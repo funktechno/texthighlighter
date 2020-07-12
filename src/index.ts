@@ -28,7 +28,10 @@ import {
  */
 function createWrapper(options: optionsImpl) {
     const span = document.createElement("span");
-    if (options.color) span.style.backgroundColor = options.color;
+    if (options.color) {
+        span.style.backgroundColor = options.color;
+        span.setAttribute("data-backgroundcolor", options.color);
+    }
     if (options.highlightedClass) span.className = options.highlightedClass;
     return span;
 }
@@ -315,8 +318,8 @@ const doHighlight = function (
         wrapper.setAttribute(TIMESTAMP_ATTR, timestamp);
 
         createdHighlights = highlightRange(el, range, wrapper);
-        if(createdHighlights.length > 0)
-        highlightMade= true;
+        if (createdHighlights.length > 0)
+            highlightMade = true;
         normalizedHighlights = normalizeHighlights(createdHighlights);
         if (options.onAfterHighlight)
             options.onAfterHighlight(range, normalizedHighlights, timestamp);
@@ -509,15 +512,24 @@ const serializeHighlights = function (el: HTMLElement | null) {
             ) {
                 offset = highlight.previousSibling.length;
             }
-            const hl: hlDescriptorI = {
-                wrapper,
-                textContent: highlight.textContent,
-                path: hlPath.join(":"),
-                offset,
-                length
-            };
+            const colorExtract = wrapper.match(
+                /(?<=\bbackgroundcolor=")[^"]*/
+            );
+            if (colorExtract && colorExtract[0]) {
+                const color = colorExtract[0].trim();
+                    // .replace("data-backgroundcolor: ", "")
+                    // .replace(";", "").trim();
+                const hl: hlDescriptorI = {
+                    wrapper,
+                    textContent: highlight.textContent,
+                    path: hlPath.join(":"),
+                    color,
+                    offset,
+                    length
+                };
 
-            hlDescriptors.push(hl);
+                hlDescriptors.push(hl);
+            }
         }
     });
     return JSON.stringify(hlDescriptors);
