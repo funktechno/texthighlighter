@@ -1,3 +1,6 @@
+/**
+ * @jest-environment jsdom
+ */
 import { doHighlight, deserializeHighlights, serializeHighlights, removeHighlights } from "../src/index";
 describe("doHighlight", () => {
   test("mock test", () => {
