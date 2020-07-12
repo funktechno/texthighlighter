@@ -1,5 +1,5 @@
 // TextHighLighterv2
-// Port by: lastlink <https://github.com/lastlink/> 
+// Port by: lastlink <https://github.com/lastlink/>
 import {
     TIMESTAMP_ATTR,
     IGNORE_TAGS,
@@ -318,7 +318,7 @@ const doHighlight = function (
         wrapper.setAttribute(TIMESTAMP_ATTR, timestamp);
 
         createdHighlights = highlightRange(el, range, wrapper);
-        if (createdHighlights.length > 0)
+        if (createdHighlights.length > 0) 
             highlightMade = true;
         normalizedHighlights = normalizeHighlights(createdHighlights);
         if (options.onAfterHighlight)
@@ -460,7 +460,7 @@ const getHighlights = function (el: HTMLElement, params?: paramsImp) {
  * @memberof TextHighlighter
  */
 const serializeHighlights = function (el: HTMLElement | null) {
-    if (!el)
+    if (!el) 
         return;
     const highlights = getHighlights(el),
         refEl = el,
@@ -602,5 +602,7 @@ export {
     deserializeHighlights,
     serializeHighlights,
     removeHighlights,
-    optionsImpl
+    optionsImpl,
+    createWrapper,
+    highlightRange
 };
