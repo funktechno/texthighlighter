@@ -1,5 +1,26 @@
 import { optionsImpl } from "./TextHighlighterUtils";
 /**
+ * Creates wrapper for highlights.
+ * TextHighlighter instance calls this method each time it needs to create highlights and pass options retrieved
+ * in constructor.
+ * @param {object} options - the same object as in TextHighlighter constructor.
+ * @returns {HTMLElement}
+ * @memberof TextHighlighter
+ * @static
+ */
+declare function createWrapper(options: optionsImpl): HTMLSpanElement;
+/**
+ * Highlights range.
+ * Wraps text of given range object in wrapper element.
+ * @param {Range} range
+ * @param {HTMLElement} wrapper
+ * @returns {Array} - array of created highlights.
+ * @memberof TextHighlighter
+ */
+declare const highlightRange: (el: HTMLElement, range: Range, wrapper: {
+    cloneNode: (arg0: boolean) => any;
+}) => HTMLElement[];
+/**
  * highlight selected element
  * @param el
  * @param options
@@ -23,4 +44,4 @@ declare const deserializeHighlights: (el: HTMLElement, json: string) => {
  */
 declare const serializeHighlights: (el: HTMLElement | null) => string | undefined;
 declare const removeHighlights: (element: HTMLElement, options?: optionsImpl | undefined) => void;
-export { doHighlight, deserializeHighlights, serializeHighlights, removeHighlights, optionsImpl };
+export { doHighlight, deserializeHighlights, serializeHighlights, removeHighlights, optionsImpl, createWrapper, highlightRange };
