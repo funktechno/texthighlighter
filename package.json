@@ -1,0 +1,35 @@
+{
+  "name": "texthighlighter",
+  "version": "1.0.0",
+  "description": "* a typescript port of https://github.com/mir3z/texthighlighter",
+  "main": "index.js",
+  "files": [
+    "lib/**/*"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "test": "jest --config jestconfig.json",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "lint": "tslint -p tsconfig.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lastlink/texthighlighter.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lastlink/texthighlighter/issues"
+  },
+  "homepage": "https://github.com/lastlink/texthighlighter#readme",
+  "devDependencies": {
+    "@types/jest": "^26.0.4",
+    "jest": "^26.1.0",
+    "prettier": "^2.0.5",
+    "ts-jest": "^26.1.1",
+    "tslint": "^6.1.2",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.9.6"
+  }
+}
