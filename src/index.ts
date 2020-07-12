@@ -10,12 +10,9 @@ import {
     sortByDepth,
     unique,
     haveSameColor,
-    //   optionsI,
     optionsImpl,
     paramsImp,
     hlDescriptorI,
-    //   H_Node,
-    //   activator,
     defaults,
     groupHighlights
 } from "./TextHighlighterUtils";
@@ -48,7 +45,7 @@ const highlightRange = function (
     el: HTMLElement,
     range: Range,
     wrapper: { cloneNode: (arg0: boolean) => any }
-) {
+): HTMLElement[] {
     if (!range || range.collapsed) {
         return [];
     }
@@ -87,8 +84,6 @@ const highlightRange = function (
 
             goDeeper = false;
         }
-        // debugger;
-        // let r = (endContainer && endContainer.hasChildNodes() && goDeeper);
         if (
             node === endContainer &&
             endContainer &&
@@ -275,10 +270,6 @@ const normalizeHighlights = function (highlights: any[]) {
     return normalizedHighlights;
 };
 
-// const defaultOptions = function (options?: optionsI): optionsI{
-
-// }
-
 /**
  * highlight selected element
  * @param el
@@ -289,8 +280,7 @@ const doHighlight = function (
     el: HTMLElement,
     keepRange: boolean,
     options?: optionsImpl
-) {
-    //   debugger;
+):boolean {
     const range = dom(el).getRange();
     let wrapper, createdHighlights, normalizedHighlights, timestamp: string;
     if (!options) options = new optionsImpl();
@@ -301,7 +291,7 @@ const doHighlight = function (
         contextClass: "highlighter-context",
 
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        onRemoveHighlight: function (...e: any[]): boolean {
+        onRemoveHighlight: function (...e: any[]) {
             return true;
         },
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -315,9 +305,9 @@ const doHighlight = function (
     });
 
     if (!range || range.collapsed) {
-        return;
+        return false;
     }
-    //   debugger;
+    let highlightMade = false;
 
     if (options.onBeforeHighlight && options.onBeforeHighlight(range) === true) {
         timestamp = (+new Date()).toString();
@@ -325,6 +315,8 @@ const doHighlight = function (
         wrapper.setAttribute(TIMESTAMP_ATTR, timestamp);
 
         createdHighlights = highlightRange(el, range, wrapper);
+        if(createdHighlights.length > 0)
+        highlightMade= true;
         normalizedHighlights = normalizeHighlights(createdHighlights);
         if (options.onAfterHighlight)
             options.onAfterHighlight(range, normalizedHighlights, timestamp);
@@ -333,6 +325,7 @@ const doHighlight = function (
     if (!keepRange) {
         dom(el).removeAllRanges();
     }
+    return highlightMade;
 };
 
 /**
@@ -345,7 +338,6 @@ const doHighlight = function (
 const deserializeHighlights = function (el: HTMLElement, json: string) {
     let hlDescriptors: hlDescriptorI[];
     const highlights: { appendChild: (arg0: any) => void }[] = [];
-    //   debugger;
     //    const self = this;
 
     if (!json) {
@@ -388,7 +380,6 @@ const deserializeHighlights = function (el: HTMLElement, json: string) {
         ) {
             elIndex -= 1;
         }
-        // debugger;
 
         node = node.childNodes[elIndex] as Text;
         if (node instanceof Text) {
@@ -468,7 +459,6 @@ const getHighlights = function (el: HTMLElement, params?: paramsImp) {
 const serializeHighlights = function (el: HTMLElement | null) {
     if (!el)
         return;
-    //   debugger;
     const highlights = getHighlights(el),
         refEl = el,
         hlDescriptors: hlDescriptorI[] = [];
