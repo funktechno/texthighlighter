@@ -1,5 +1,5 @@
 # texthighlighter
-* a no dependency typescript tool for highlighting user selected content, removing highlights, serializing existing highlights, and applying serialized highlights
+* a no dependency typescript supported tool for highlighting user selected content, removing highlights, serializing existing highlights, and applying serialized highlights
 * a nodependency typescript port of https://github.com/mir3z/texthighlighter because typescript is amazing. Some bugs were even fixed by just converting to typescript. Functions were converted to not need class instantiation. Followed article https://itnext.io/step-by-step-building-and-publishing-an-npm-typescript-package-44fe7164964c on setting up a typescript package after testing my port on my own project. Pull requests are welcome!
 
 ## Usage
