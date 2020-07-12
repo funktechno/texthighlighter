@@ -280,7 +280,7 @@ const doHighlight = function (
     el: HTMLElement,
     keepRange: boolean,
     options?: optionsImpl
-):boolean {
+): boolean {
     const range = dom(el).getRange();
     let wrapper, createdHighlights, normalizedHighlights, timestamp: string;
     if (!options) options = new optionsImpl();
