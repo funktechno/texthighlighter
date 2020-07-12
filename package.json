@@ -8,9 +8,11 @@
   ],
   "scripts": {
     "build": "tsc",
-    "test": "jest --config jestconfig.json",
-    "format": "prettier --write \"src/**/*.ts\"",
-    "lint": "tslint -p tsconfig.json"
+    "test": "jest --forceExit --verbose",
+    "test:coverage": "jest --forceExit --coverage --verbose",
+    "test:watch": "jest --watchAll",
+    "lint": "tsc --noEmit && eslint \"src/**/*.{js,ts}\"",
+    "lint:fix": "tsc --noEmit && eslint \"src/**/*.{js,ts}\" --fix"
   },
   "repository": {
     "type": "git",
@@ -24,12 +26,18 @@
   },
   "homepage": "https://github.com/lastlink/texthighlighter#readme",
   "devDependencies": {
+    "@types/eslint": "^6.1.8",
+    "@typescript-eslint/eslint-plugin": "^2.24.0",
+    "@typescript-eslint/parser": "^2.24.0",
     "@types/jest": "^26.0.4",
+    "eslint": "^6.8.0",
     "jest": "^26.1.0",
-    "prettier": "^2.0.5",
+    "jest-junit": "^11.0.1",
     "ts-jest": "^26.1.1",
-    "tslint": "^6.1.2",
-    "tslint-config-prettier": "^1.18.0",
+    "ts-loader": "^6.2.2",
     "typescript": "^3.9.6"
+  },
+  "dependencies": {
+    "ts-node": "^8.10.2"
   }
 }
