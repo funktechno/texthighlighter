@@ -500,7 +500,11 @@ const serializeHighlights = function (el: HTMLElement | null) {
                 wrapper = highlight.cloneNode(true) as HTMLElement | string;
             const length = highlight.textContent.length,
                 hlPath = getElementPath(highlight, refEl);
+            let color = "";
             if (wrapper instanceof HTMLElement) {
+                const c = wrapper.getAttribute("data-backgroundcolor");
+                if (c)
+                    color = c.trim();
                 wrapper.innerHTML = "";
                 wrapper = wrapper.outerHTML;
             }
@@ -512,24 +516,16 @@ const serializeHighlights = function (el: HTMLElement | null) {
             ) {
                 offset = highlight.previousSibling.length;
             }
-            const colorExtract = wrapper.match(
-                /(?<=\bbackgroundcolor=")[^"]*/
-            );
-            if (colorExtract && colorExtract[0]) {
-                const color = colorExtract[0].trim();
-                    // .replace("data-backgroundcolor: ", "")
-                    // .replace(";", "").trim();
-                const hl: hlDescriptorI = {
-                    wrapper,
-                    textContent: highlight.textContent,
-                    path: hlPath.join(":"),
-                    color,
-                    offset,
-                    length
-                };
+            const hl: hlDescriptorI = {
+                wrapper,
+                textContent: highlight.textContent,
+                path: hlPath.join(":"),
+                color,
+                offset,
+                length
+            };
 
-                hlDescriptors.push(hl);
-            }
+            hlDescriptors.push(hl);
         }
     });
     return JSON.stringify(hlDescriptors);
