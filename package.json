@@ -13,7 +13,7 @@
     "preversion": "npm run lint",
     "version": "npm run format && git add -A src",
     "postversion": "git push && git push --tags",
-    "test": "jest --forceExit --verbose",
+    "test": "jest -c ./jest.config.js --forceExit --verbose -i --no-cache",
     "test:coverage": "jest --forceExit --coverage --verbose",
     "test:watch": "jest --watchAll",
     "lint": "tsc --noEmit && eslint \"src/**/*.{js,ts}\"",
