@@ -1,6 +1,6 @@
 {
   "name": "@funktechno/texthighlighter",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "* a typescript port of https://github.com/mir3z/texthighlighter",
   "main": "index.js",
   "files": [
