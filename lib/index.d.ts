@@ -23,4 +23,4 @@ declare const deserializeHighlights: (el: HTMLElement, json: string) => {
  */
 declare const serializeHighlights: (el: HTMLElement | null) => string | undefined;
 declare const removeHighlights: (element: HTMLElement, options?: optionsImpl | undefined) => void;
-export { doHighlight, deserializeHighlights, serializeHighlights, removeHighlights };
+export { doHighlight, deserializeHighlights, serializeHighlights, removeHighlights, optionsImpl };
