@@ -1,5 +1,5 @@
 {
-  "name": "texthighlighter",
+  "name": "@funktechno/texthighlighter",
   "version": "1.0.0",
   "description": "* a typescript port of https://github.com/mir3z/texthighlighter",
   "main": "index.js",
@@ -8,11 +8,11 @@
   ],
   "scripts": {
     "build": "tsc",
-    "prepare" : "npm run build",
-    "prepublishOnly" : "npm test && npm run lint",
-    "preversion" : "npm run lint",
-    "version" : "npm run format && git add -A src",
-    "postversion" : "git push && git push --tags",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test && npm run lint",
+    "preversion": "npm run lint",
+    "version": "npm run format && git add -A src",
+    "postversion": "git push && git push --tags",
     "test": "jest --forceExit --verbose",
     "test:coverage": "jest --forceExit --coverage --verbose",
     "test:watch": "jest --watchAll",
@@ -23,7 +23,11 @@
     "type": "git",
     "url": "git+https://github.com/lastlink/texthighlighter.git"
   },
-  "keywords": ["typescript", "highlight", "text"],
+  "keywords": [
+    "typescript",
+    "highlight",
+    "text"
+  ],
   "author": "lastlink",
   "license": "ISC",
   "bugs": {
@@ -44,5 +48,9 @@
   },
   "dependencies": {
     "ts-node": "^8.10.2"
+  },
+  "directories": {
+    "lib": "lib",
+    "test": "tests"
   }
 }
