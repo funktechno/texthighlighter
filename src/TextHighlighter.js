@@ -1,3 +1,21 @@
+// original TextHighlighter
+// if using typescript can enable by
+// import TextHighlighter from "texthighlighter";
+// and create a type any file (I don't have the definitions)
+// src/types/texthighlighter/index.d.ts
+/*
+declare module "texthighlighter" {
+  let TextHighlighter: any;
+
+  export = TextHighlighter;
+}
+*/
+// then instantiate after import by
+/*
+const domEle = document.getElementById("bookPage");
+this.hltr = new TextHighlighter(domEle, {});
+*/
+
 (function (global) {
     "use strict";
 

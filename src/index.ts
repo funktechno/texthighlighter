@@ -1,4 +1,5 @@
 // TextHighLighterv2
+// Port by: lastlink <https://github.com/lastlink/> 
 import {
     TIMESTAMP_ATTR,
     IGNORE_TAGS,
