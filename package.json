@@ -1,6 +1,6 @@
 {
   "name": "@funktechno/texthighlighter",
-  "version": "2.0.7",
+  "version": "2.0.8",
   "description": "a no dependency typescript supported tool for highlighting user selected content",
   "main": "index.js",
   "files": [
