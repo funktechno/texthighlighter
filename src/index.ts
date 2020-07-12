@@ -30,7 +30,7 @@ function createWrapper(options: optionsImpl) {
     const span = document.createElement("span");
     if (options.color) {
         span.style.backgroundColor = options.color;
-        span.setAttribute("data-backgroundColor", options.color);
+        span.setAttribute("data-backgroundcolor", options.color);
     }
     if (options.highlightedClass) span.className = options.highlightedClass;
     return span;
@@ -513,11 +513,11 @@ const serializeHighlights = function (el: HTMLElement | null) {
                 offset = highlight.previousSibling.length;
             }
             const colorExtract = wrapper.match(
-                /data-backgroundColor:\s.*;/
+                /data-backgroundcolor:\s.*;/
             );
             if (colorExtract && colorExtract[0]) {
                 const color = colorExtract[0]
-                    .replace("data-backgroundColor: ", "")
+                    .replace("data-backgroundcolor: ", "")
                     .replace(";", "").trim();
                 const hl: hlDescriptorI = {
                     wrapper,
