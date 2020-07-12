@@ -603,5 +603,6 @@ export {
     doHighlight,
     deserializeHighlights,
     serializeHighlights,
-    removeHighlights
+    removeHighlights,
+    optionsImpl
 };
