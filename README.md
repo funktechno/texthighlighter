@@ -7,7 +7,7 @@
 * in code
 
 ```js
-import { doHighlight, deserializeHighlights, serializeHighlights, removeHighlights } from "@/../node_modules/@funktechno/texthighlighter/lib/index";
+import { doHighlight, deserializeHighlights, serializeHighlights, removeHighlights, optionsImpl } from "@/../node_modules/@funktechno/texthighlighter/lib/index";
 const domEle = document.getElementById("sandbox");
 const options: optionsImpl = {};
 if (this.color) options.color = this.color;
