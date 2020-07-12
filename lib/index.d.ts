@@ -5,7 +5,7 @@ import { optionsImpl } from "./TextHighlighterUtils";
  * @param options
  * @param keepRange
  */
-declare const doHighlight: (el: HTMLElement, keepRange: boolean, options?: optionsImpl | undefined) => void;
+declare const doHighlight: (el: HTMLElement, keepRange: boolean, options?: optionsImpl | undefined) => boolean;
 /**
  * Deserializes highlights.
  * @throws exception when can't parse JSON or JSON has invalid structure.
