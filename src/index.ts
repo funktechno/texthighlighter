@@ -513,12 +513,12 @@ const serializeHighlights = function (el: HTMLElement | null) {
                 offset = highlight.previousSibling.length;
             }
             const colorExtract = wrapper.match(
-                /data-backgroundcolor:\s.*;/
+                /(?<=\bbackgroundcolor=")[^"]*/
             );
             if (colorExtract && colorExtract[0]) {
-                const color = colorExtract[0]
-                    .replace("data-backgroundcolor: ", "")
-                    .replace(";", "").trim();
+                const color = colorExtract[0].trim();
+                    // .replace("data-backgroundcolor: ", "")
+                    // .replace(";", "").trim();
                 const hl: hlDescriptorI = {
                     wrapper,
                     textContent: highlight.textContent,
