@@ -43,7 +43,7 @@ var methods = {
   runHighlight(:any){
     // run mobile a bit different
     if (this.isMobile()) return;
-    const domEle = document.getElementById("matchHighlighCondition");
+    const domEle = document.getElementById("sandbox");
     const options: optionsImpl = {};
     if (domEle) {
         const highlightMade = doHighlight(domEle, true, options);
