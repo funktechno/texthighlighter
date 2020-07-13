@@ -318,8 +318,7 @@ const doHighlight = function (
         wrapper.setAttribute(TIMESTAMP_ATTR, timestamp);
 
         createdHighlights = highlightRange(el, range, wrapper);
-        if (createdHighlights.length > 0) 
-            highlightMade = true;
+        if (createdHighlights.length > 0) highlightMade = true;
         normalizedHighlights = normalizeHighlights(createdHighlights);
         if (options.onAfterHighlight)
             options.onAfterHighlight(range, normalizedHighlights, timestamp);
@@ -460,8 +459,7 @@ const getHighlights = function (el: HTMLElement, params?: paramsImp) {
  * @memberof TextHighlighter
  */
 const serializeHighlights = function (el: HTMLElement | null) {
-    if (!el) 
-        return;
+    if (!el) return;
     const highlights = getHighlights(el),
         refEl = el,
         hlDescriptors: hlDescriptorI[] = [];
@@ -503,8 +501,7 @@ const serializeHighlights = function (el: HTMLElement | null) {
             let color = "";
             if (wrapper instanceof HTMLElement) {
                 const c = wrapper.getAttribute("data-backgroundcolor");
-                if (c)
-                    color = c.trim();
+                if (c) color = c.trim();
                 wrapper.innerHTML = "";
                 wrapper = wrapper.outerHTML;
             }
@@ -575,7 +572,6 @@ const removeHighlights = function (element: HTMLElement, options?: optionsImpl) 
             dom(next).remove();
         }
     }
-
     function removeHighlight(highlight: any) {
         const textNodes = dom(highlight).unwrap();
         if (textNodes)
