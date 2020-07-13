@@ -327,7 +327,7 @@ const dom = function(el: Node | HTMLElement | null | undefined) {
     insertBefore: function(refEl: {
       parentNode: { insertBefore: (arg0: any, arg1: any) => any };
     }) {
-      return refEl.parentNode.insertBefore(el, refEl);
+      return refEl.parentNode ? refEl.parentNode.insertBefore(el, refEl) : refEl;
     },
 
     /**
@@ -525,7 +525,6 @@ function sortByDepth(arr: any, descending: any) {
     );
   });
 }
-
 
 export {
   DATA_ATTR,
