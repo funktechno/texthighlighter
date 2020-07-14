@@ -372,8 +372,10 @@ const deserializeHighlights = function (el: HTMLElement, json: string) {
         // should have a value and not be 0 (false is = to 0)
         if (elIndex != 0 && !elIndex) return;
 
-        while ((idx = hl.hlpaths.shift())) {
-            node = node.childNodes[idx] as Node;
+        while (hl.hlpaths.length > 0) {
+            idx = hl.hlpaths.shift();
+            if (idx || idx == 0)
+                node = node.childNodes[idx] as Node;
         }
 
         if (
@@ -472,7 +474,6 @@ const serializeHighlights = function (el: HTMLElement | null) {
     ) {
         const path = [];
         let childNodes;
-
         if (el)
             do {
                 if (el instanceof HTMLElement && el.parentNode) {
@@ -573,6 +574,7 @@ const removeHighlights = function (element: HTMLElement, options?: optionsImpl) 
         }
     }
     function removeHighlight(highlight: any) {
+        if (!highlight) return;
         const textNodes = dom(highlight).unwrap();
         if (textNodes)
             textNodes.forEach(function (node) {

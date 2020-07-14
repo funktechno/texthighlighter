@@ -105,7 +105,7 @@ const /**
     "PROGRESS"
   ];
 
-function activator<T>(type: { new (): T }): T {
+function activator<T>(type: { new(): T }): T {
   return new type();
 }
 
@@ -119,7 +119,7 @@ function groupHighlights(highlights: any) {
     chunks: any = {},
     grouped: any = [];
 
-  highlights.forEach(function(hl: any) {
+  highlights.forEach(function (hl: any) {
     const timestamp = hl.getAttribute(TIMESTAMP_ATTR);
 
     if (typeof chunks[timestamp] === "undefined") {
@@ -130,15 +130,15 @@ function groupHighlights(highlights: any) {
     chunks[timestamp].push(hl);
   });
 
-  order.forEach(function(timestamp: any) {
+  order.forEach(function (timestamp: any) {
     const group = chunks[timestamp];
 
     grouped.push({
       chunks: group,
       timestamp: timestamp,
-      toString: function() {
+      toString: function () {
         return group
-          .map(function(h: { textContent: any }) {
+          .map(function (h: { textContent: any }) {
             return h.textContent;
           })
           .join("");
@@ -174,7 +174,7 @@ function defaults<T>(obj: T, source: T): T {
  * @returns {Array}
  */
 function unique(arr: any) {
-  return arr.filter(function(value: any, idx: any, self: string | any[]) {
+  return arr.filter(function (value: any, idx: any, self: string | any[]) {
     return self.indexOf(value) === idx;
   });
 }
@@ -186,9 +186,9 @@ function unique(arr: any) {
  */
 function refineRangeBoundaries(range: Range) {
   let startContainer:
-      | Node
-      | (Node & ParentNode)
-      | null = range.startContainer as HTMLElement,
+    | Node
+    | (Node & ParentNode)
+    | null = range.startContainer as HTMLElement,
     endContainer: Node | (Node & ParentNode) | null = range.endContainer,
     goDeeper = true;
   const ancestor = range.commonAncestorContainer;
@@ -247,13 +247,13 @@ function refineRangeBoundaries(range: Range) {
  * @param {Node|HTMLElement} [el] - base DOM element to manipulate
  * @returns {object}
  */
-const dom = function(el: Node | HTMLElement | null | undefined) {
+const dom = function (el: Node | HTMLElement | null | undefined) {
   return /** @lends dom **/ {
     /**
      * Adds class to element.
      * @param {string} className
      */
-    addClass: function(className: string) {
+    addClass: function (className: string) {
       if (el instanceof HTMLElement)
         if (el.classList) {
           el.classList.add(className);
@@ -266,7 +266,7 @@ const dom = function(el: Node | HTMLElement | null | undefined) {
      * Removes class from element.
      * @param {string} className
      */
-    removeClass: function(className: string) {
+    removeClass: function (className: string) {
       if (el instanceof HTMLElement) {
         if (el.classList) {
           el.classList.remove(className);
@@ -283,7 +283,7 @@ const dom = function(el: Node | HTMLElement | null | undefined) {
      * Prepends child nodes to base element.
      * @param {Node[]} nodesToPrepend
      */
-    prepend: function(nodesToPrepend: any) {
+    prepend: function (nodesToPrepend: any) {
       const nodes = Array.prototype.slice.call(nodesToPrepend);
       let i = nodes.length;
 
@@ -297,7 +297,7 @@ const dom = function(el: Node | HTMLElement | null | undefined) {
      * Appends child nodes to base element.
      * @param {Node[]} nodesToAppend
      */
-    append: function(nodesToAppend: any) {
+    append: function (nodesToAppend: any) {
       if (el) {
         const nodes = Array.prototype.slice.call(nodesToAppend);
 
@@ -312,7 +312,7 @@ const dom = function(el: Node | HTMLElement | null | undefined) {
      * @param {Node} refEl - node after which base element will be inserted
      * @returns {Node} - inserted element
      */
-    insertAfter: function(refEl: {
+    insertAfter: function (refEl: {
       parentNode: { insertBefore: (arg0: any, arg1: any) => any };
       nextSibling: any;
     }) {
@@ -324,16 +324,18 @@ const dom = function(el: Node | HTMLElement | null | undefined) {
      * @param {Node} refEl - node before which base element will be inserted
      * @returns {Node} - inserted element
      */
-    insertBefore: function(refEl: {
+    insertBefore: function (refEl: {
       parentNode: { insertBefore: (arg0: any, arg1: any) => any };
     }) {
-      return refEl.parentNode ? refEl.parentNode.insertBefore(el, refEl) : refEl;
+      return refEl.parentNode
+        ? refEl.parentNode.insertBefore(el, refEl)
+        : refEl;
     },
 
     /**
      * Removes base element from DOM.
      */
-    remove: function() {
+    remove: function () {
       if (el && el.parentNode) {
         el.parentNode.removeChild(el);
         el = null;
@@ -345,7 +347,7 @@ const dom = function(el: Node | HTMLElement | null | undefined) {
      * @param {Node|HTMLElement} child
      * @returns {boolean}
      */
-    contains: function(child: any) {
+    contains: function (child: any) {
       return el && el !== child && el.contains(child);
     },
 
@@ -354,7 +356,7 @@ const dom = function(el: Node | HTMLElement | null | undefined) {
      * @param {HTMLElement} wrapper
      * @returns {HTMLElement} wrapper element
      */
-    wrap: function(wrapper: HTMLElement) {
+    wrap: function (wrapper: HTMLElement) {
       if (el) {
         if (el.parentNode) {
           el.parentNode.insertBefore(wrapper, el);
@@ -369,14 +371,15 @@ const dom = function(el: Node | HTMLElement | null | undefined) {
      * Unwraps base element.
      * @returns {Node[]} - child nodes of unwrapped element.
      */
-    unwrap: function() {
+    unwrap: function () {
       if (el) {
         const nodes = Array.prototype.slice.call(el.childNodes);
         let wrapper;
-
-        nodes.forEach(function(node) {
+        // debugger;
+        nodes.forEach(function (node) {
           wrapper = node.parentNode;
-          dom(node).insertBefore(node.parentNode);
+          const d = dom(node);
+          if (d && node.parentNode) d.insertBefore(node.parentNode);
           dom(wrapper).remove();
         });
 
@@ -388,7 +391,7 @@ const dom = function(el: Node | HTMLElement | null | undefined) {
      * Returns array of base element parents.
      * @returns {HTMLElement[]}
      */
-    parents: function() {
+    parents: function () {
       let parent;
       const path = [];
       if (el) {
@@ -406,7 +409,7 @@ const dom = function(el: Node | HTMLElement | null | undefined) {
      * element node has only one text node.
      * It should does the same as standard element.normalize, but IE implements it incorrectly.
      */
-    normalizeTextNodes: function() {
+    normalizeTextNodes: function () {
       if (!el) {
         return;
       }
@@ -433,7 +436,7 @@ const dom = function(el: Node | HTMLElement | null | undefined) {
      * Returns element background color.
      * @returns {CSSStyleDeclaration.backgroundColor}
      */
-    color: function() {
+    color: function () {
       return el instanceof HTMLElement && el.style
         ? el.style.backgroundColor
         : null;
@@ -444,7 +447,7 @@ const dom = function(el: Node | HTMLElement | null | undefined) {
      * @param {string} html
      * @returns {NodeList}
      */
-    fromHTML: function(html: string) {
+    fromHTML: function (html: string) {
       const div = document.createElement("div");
       div.innerHTML = html;
       return div.childNodes;
@@ -454,7 +457,7 @@ const dom = function(el: Node | HTMLElement | null | undefined) {
      * Returns first range of the window of base element.
      * @returns {Range}
      */
-    getRange: function() {
+    getRange: function () {
       const selection = dom(el).getSelection();
       let range;
 
@@ -468,7 +471,7 @@ const dom = function(el: Node | HTMLElement | null | undefined) {
     /**
      * Removes all ranges of the window of base element.
      */
-    removeAllRanges: function() {
+    removeAllRanges: function () {
       const selection = dom(el).getSelection();
       if (selection) selection.removeAllRanges();
     },
@@ -477,7 +480,7 @@ const dom = function(el: Node | HTMLElement | null | undefined) {
      * Returns selection object of the window of base element.
      * @returns {Selection}
      */
-    getSelection: function() {
+    getSelection: function () {
       const win = dom(el).getWindow();
       return win ? win.getSelection() : null;
     },
@@ -486,7 +489,7 @@ const dom = function(el: Node | HTMLElement | null | undefined) {
      * Returns window of the base element.
      * @returns {Window}
      */
-    getWindow: function() {
+    getWindow: function () {
       const doc = dom(el).getDocument() as Document;
       return doc instanceof Document ? doc.defaultView : null;
     },
@@ -495,7 +498,7 @@ const dom = function(el: Node | HTMLElement | null | undefined) {
      * Returns document of the base element.
      * @returns {HTMLDocument}
      */
-    getDocument: function() {
+    getDocument: function () {
       // if ownerDocument is null then el is the document itself.
       if (el) return el.ownerDocument || el;
     }
@@ -518,7 +521,7 @@ function haveSameColor(a: Node, b: Node) {
  * @param {boolean} descending - order of sort.
  */
 function sortByDepth(arr: any, descending: any) {
-  arr.sort(function(a: any, b: any) {
+  arr.sort(function (a: any, b: any) {
     return (
       dom(descending ? b : a).parents().length -
       dom(descending ? a : b).parents().length
