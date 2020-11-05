@@ -32,16 +32,22 @@
 
         <div class="code shadow">
 <pre><code data-language="javascript">
-new TextHighlighter(sandbox, {
+var options = {
     onBeforeHighlight: function (range) {
-        // ...
+        return window.confirm('Selected text: ' + range + '\nReally highlight?');
     },
-    onAfterHighlight: function (range, hlts) {
-        // ...
+    onAfterHighlight: function (range, highlights) {
+        window.alert('Created ' + highlights.length + ' highlight(s): ' + highlights.map(function (h) {
+            return '"' + h.innerText + '"';
+        }).join(', '));
     },
-    onRemoveHighlight: function (hlt) {
-        // ...
+    onRemoveHighlight: function (hl) {
+        return window.confirm('Do you really want to remove: "' + hl.innerText + '"');
     }
+}
+
+sandbox.addEventListener("mouseup", e => {
+    TextHighlighter.doHighlight(sandbox, true, options)
 });
 </code></pre>
         </div>
@@ -156,7 +162,7 @@ new TextHighlighter(sandbox, {
             var removeBtn = document.getElementById('remove');
             var sandbox = document.getElementById('sandbox');
             var colors = new ColorPicker(document.querySelector('.color-picker'));
-            var hltr = new TextHighlighter(sandbox, {
+            var options = {
                 onBeforeHighlight: function (range) {
                     return window.confirm('Selected text: ' + range + '\nReally highlight?');
                 },
@@ -168,14 +174,36 @@ new TextHighlighter(sandbox, {
                 onRemoveHighlight: function (hl) {
                     return window.confirm('Do you really want to remove: "' + hl.innerText + '"');
                 }
+            }
+            options.color = colors.color;
+            // var hltr = new TextHighlighter(sandbox, {
+            //     onBeforeHighlight: function (range) {
+            //         return window.confirm('Selected text: ' + range + '\nReally highlight?');
+            //     },
+            //     onAfterHighlight: function (range, highlights) {
+            //         window.alert('Created ' + highlights.length + ' highlight(s): ' + highlights.map(function (h) {
+            //             return '"' + h.innerText + '"';
+            //         }).join(', '));
+            //     },
+            //     onRemoveHighlight: function (hl) {
+            //         return window.confirm('Do you really want to remove: "' + hl.innerText + '"');
+            //     }
+            // });
+
+            sandbox.addEventListener("mouseup", e => {
+                TextHighlighter.doHighlight(sandbox, true, options)
+            });
+
+            sandbox.addEventListener("touchend", e => {
+                TextHighlighter.doHighlight(sandbox, true, options)
             });
 
             colors.onColorChange(function (color) {
-                hltr.setColor(color);
+                options.color = color;
             });
 
             removeBtn.addEventListener('click', function () {
-                hltr.removeHighlights();
+                TextHighlighter.removeHighlights(sandbox);
             });
         })();
     </script>

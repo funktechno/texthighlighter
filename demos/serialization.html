@@ -33,18 +33,17 @@
 
         <div class="code shadow">
 <pre><code data-language="javascript">
-var hltr = new TextHighlighter(sandbox),
-    serialized;
+var serialized;
 
-serializeBtn.onclick = function () {
-    serialized = hltr.serializeHighlights();
+serializeBtn.addEventListener('click', function () {
+    serialized = TextHighlighter.serializeHighlights(sandbox);
     console.log(serialized);
-    hltr.removeHighlights();
+    TextHighlighter.removeHighlights(sandbox);
 });
 
-deserializeBtn.onclick = function () {
-    hltr.removeHighlights();
-    hltr.deserializeHighlights(serialized);
+deserializeBtn.addEventListener('click', function () {
+    TextHighlighter.removeHighlights(sandbox);
+    TextHighlighter.deserializeHighlights(sandbox, serialized);
 });
 </code></pre>
         </div>
