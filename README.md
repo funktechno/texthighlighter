@@ -53,6 +53,9 @@ var methods = {
 
 ```
 
+## development
+* `npm install` or `yarn import`
+
 ## deploy
 * npm publish --access public 
 
