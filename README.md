@@ -1,6 +1,6 @@
 # texthighlighter
-* a no dependency typescript supported tool for highlighting user selected content, removing highlights, serializing existing highlights, and applying serialized highlights. Works on mobile device.
-* a nodependency typescript port of https://github.com/mir3z/texthighlighter because typescript is amazing. Some bugs were even fixed by just converting to typescript. Functions were converted to not need class instantiation. Followed article https://itnext.io/step-by-step-building-and-publishing-an-npm-typescript-package-44fe7164964c on setting up a typescript package after testing my port on my own project. Pull requests are welcome!
+* a **no dependency** typescript supported tool for highlighting user selected content, removing highlights, serializing existing highlights, and applying serialized highlights. Works on mobile device.
+* a no dependency typescript port of https://github.com/mir3z/texthighlighter because typescript is amazing. Some bugs were even fixed by just converting to typescript. Functions were converted to not need class instantiation. Followed article https://itnext.io/step-by-step-building-and-publishing-an-npm-typescript-package-44fe7164964c on setting up a typescript package after testing my port on my own project. Pull requests are welcome!
 
 ## Usage
 * `npm install @funktechno/texthighlighter`
@@ -52,6 +52,13 @@ var methods = {
 }
 
 ```
+
+## Demos
+
+* [Simple demo](http://funktechno.github.io/texthighlighter/demos/simple.html)
+* [Callbacks](http://funktechno.github.io/texthighlighter/demos/callbacks.html)
+* [Serialization](http://funktechno.github.io/texthighlighter/demos/serialization.html)
+* [Iframe](http://funktechno.github.io/texthighlighter/demos/iframe.html)
 
 ## development
 * `npm install` or `yarn import`
