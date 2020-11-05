@@ -14,6 +14,7 @@ module.exports = {
     testMatch: [
         "**/tests/**/*.spec.(ts|js)"
     ],
+    runner: "jest-serial-runner",
     testEnvironment: "node",
     reporters: ["default", "jest-junit"],
     // collectCoverage: true,

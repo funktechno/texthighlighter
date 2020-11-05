@@ -1,26 +1,35 @@
-import fs from "fs";
+/* eslint-disable @typescript-eslint/no-var-requires */
+// import {fs} from "fs";
+import * as fs from "fs";
+// const fs = require("fs");
+const path = require("path");
+const base_DIR = path.join(__dirname, "../data/results");
 
-export async function getExpectedDict(testData: string): Promise<Record<string, any>> {
-    const filePath = "" + testData + ".json";
+export async function getExpectedDict<T>(testData: string): Promise<Record<string, T | null>> {
+    const filePath = path.join(base_DIR, testData + ".json");
     console.log(filePath);
-    if (fs.existsSync(filePath)) {
-        const expectedResults: Record<string, any> = await JSON.parse(fs.readFileSync(filePath, "utf8"));
+    if (await fs.existsSync(filePath)) {
+        const expectedResults: Record<string, T> = await JSON.parse(fs.readFileSync(filePath, "utf8"));
         return expectedResults;
     } else
         return {};
 }
 
-export async function getExpected(testData: string, key: string): Promise<any> {
-
-    return await getExpectedDict(testData)[key];
-
+export async function getExpected<T>(testData: string, key: string): Promise<T | null> {
+    const expectedResults = await getExpectedDict<T>(testData);
+    if (expectedResults[key]) {
+        return expectedResults[key];
+    } else {
+        return null;
+    }
 }
 
-export async function updateExpected(testData: string, key: string, result: any) {
-    const expectedResults = await getExpectedDict(testData);
+export async function updateExpected<T>(testData: string, key: string, result: T | null) {
+    const expectedResults = await getExpectedDict<T>(testData);
+
     expectedResults[key] = result;
-    fs.writeFile(testData + ".json", JSON.stringify(expectedResults, null, 4), function (err) {
-        if (err) return console.log(err);
-        console.log("Expected result updated:" + testData + " key:" + key);
-    });
+
+    const filePath = path.join(base_DIR, testData + ".json");
+    const stringResults = JSON.stringify(expectedResults, null, 4);
+    await fs.writeFileSync(filePath, stringResults);
 }

@@ -4,7 +4,7 @@
 import { doHighlight, deserializeHighlights, serializeHighlights, removeHighlights } from "../src/index";
 import { getExpected, updateExpected } from "./utils/helper";
 const dataSource = "doHighlight";
-describe("doHighlight", async () => {
+describe("doHighlight", () => {
   test("mock test", async () => {
     expect(true).toBe(true);// Set up our document body
     document.body.innerHTML =
@@ -49,7 +49,7 @@ describe("doHighlight", async () => {
       await updateExpected(dataSource, dataKey, result);
     }
 
-    console.log(result);
+    // console.log(result);
     expect(result).toBe(expectedResult);
     // expect(Greeter("Carl")).toBe("Hello Carl");
 

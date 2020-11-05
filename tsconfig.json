@@ -8,9 +8,14 @@
     "allowJs": true,
     "declaration": true,
     "outDir": "./lib",
+    "lib": [
+      "es2018",
+      "dom"
+    ],
     "strict": true,
     "types": [
-      "jest"
+      "jest",
+      "node"
     ]
   },
   "include": [
