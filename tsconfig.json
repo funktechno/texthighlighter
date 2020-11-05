@@ -14,7 +14,7 @@
     ]
   },
   "include": [
-    "src", "TextHighLighterv2.ts"
+    "src"
   ],
   "exclude": [
     "node_modules",
