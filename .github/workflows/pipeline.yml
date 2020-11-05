@@ -1,4 +1,4 @@
-name: Vue Build Pipeline
+name: Build Pipeline
 
 on:
   # [pull_request, push]
