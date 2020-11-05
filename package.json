@@ -8,7 +8,7 @@
   ],
   "scripts": {
     "build": "tsc",
-    "build:client": "browserify src/index.ts -p [ tsify --noImplicitAny ] > dist/TextHighlighter.js",
+    "build:client": "browserify client/index.ts -p [ tsify --noImplicitAny ] > dist/TextHighlighter.js",
     "prepare": "npm run build",
     "prepublishOnly": "npm test && npm run lint",
     "preversion": "npm run lint",
@@ -18,9 +18,7 @@
     "test:coverage": "jest --forceExit --coverage --verbose",
     "test:watch": "jest --watchAll",
     "lint": "tsc --noEmit && eslint \"src/**/*.{js,ts}\"",
-    "lint:fix": "tsc --noEmit && eslint \"src/**/*.{js,ts}\" --fix",
-    "gulp:version": "gulp --version",
-    "gulp:build": "gulp build"
+    "lint:fix": "tsc --noEmit && eslint \"src/**/*.{js,ts}\" --fix"
   },
   "repository": {
     "type": "git",
@@ -52,8 +50,6 @@
     "@typescript-eslint/parser": "^2.24.0",
     "browserify": "^17.0.0",
     "eslint": "^6.8.0",
-    "gulp": "^4.0.2",
-    "gulp-typescript": "^6.0.0-alpha.1",
     "jest": "^26.1.0",
     "jest-junit": "^11.0.1",
     "jest-serial-runner": "^1.1.0",
