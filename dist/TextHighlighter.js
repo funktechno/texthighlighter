@@ -3,7 +3,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 // TextHighLighterv2 client
 var index_1 = require("../src/index");
-// declare const TextHighlighter: TextHighlighterType;
 var TextHighlighter = {
     doHighlight: index_1.doHighlight,
     deserializeHighlights: index_1.deserializeHighlights,
@@ -12,7 +11,6 @@ var TextHighlighter = {
     optionsImpl: index_1.optionsImpl
 };
 window.TextHighlighter = TextHighlighter;
-// globalThis/* or window */.TextHighlighter = TextHighlighter;
 
 },{"../src/index":3}],2:[function(require,module,exports){
 "use strict";
