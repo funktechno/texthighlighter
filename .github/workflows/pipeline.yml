@@ -26,7 +26,7 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: "${{ steps.nvm.outputs.NVMRC }}"
-    - run: yarn import
+    - run: yarn install
     - run: npm run test
     - name: upload junit
       uses: actions/upload-artifact@v1
