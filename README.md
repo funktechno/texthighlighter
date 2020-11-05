@@ -64,3 +64,4 @@ var methods = {
   * works where it's being used (in a vue ts project)
 * [ ] bring over demos and examples
 * [ ] improve unit tests
+  * [x] pipeline
