@@ -29,15 +29,24 @@
 
         <div class="code shadow">
 <pre><code data-language="javascript">
-var hltr = new TextHighlighter(sandbox);
+var sandbox = document.getElementById('sandbox');
+var options = {}
 
-colors.onColorChange(function (color) {
-    hltr.setColor(color);
+sandbox.addEventListener("mouseup", e => {
+    TextHighlighter.doHighlight(sandbox, true, options)
 });
 
-buttonRemove.onclick = function () {
-    hltr.removeHighlights();
-};
+sandbox.addEventListener("touchend", e => {
+    TextHighlighter.doHighlight(sandbox, true, options)
+});
+
+colors.onColorChange(function (color) {
+    options.color = color;
+});
+
+removeBtn.addEventListener('click', function () {
+    TextHighlighter.removeHighlights(sandbox);
+});
 </code></pre>
         </div>
 
@@ -143,7 +152,7 @@ buttonRemove.onclick = function () {
         </div>
     </div>
     <div id="footer">
-        Copyright &copy; 2011-2014 by mirz. All Rights Reserved.
+        Copyright &copy; 2020-<span id="currentYear"></span> by lastlink. All Rights Reserved.
     </div>
 
     <script type="text/javascript">
@@ -151,17 +160,27 @@ buttonRemove.onclick = function () {
             var removeBtn = document.getElementById('remove');
             var sandbox = document.getElementById('sandbox');
             var colors = new ColorPicker(document.querySelector('.color-picker'));
-            var hltr = new TextHighlighter(sandbox);
+            var options = {}
+            options.color = colors.color;
+
+            sandbox.addEventListener("mouseup", e => {
+                TextHighlighter.doHighlight(sandbox, true, options)
+            });
+
+            sandbox.addEventListener("touchend", e => {
+                TextHighlighter.doHighlight(sandbox, true, options)
+            });
 
             colors.onColorChange(function (color) {
-                hltr.setColor(color);
+                options.color = color;
             });
 
             removeBtn.addEventListener('click', function () {
-                hltr.removeHighlights();
+                TextHighlighter.removeHighlights(sandbox);
             });
         })();
     </script>
+    <script type="text/javascript" src="assets/setYear.js"></script>
 
 </body>
 </html>

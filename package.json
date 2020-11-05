@@ -17,8 +17,8 @@
     "test": "jest -c ./jest.config.js --forceExit --verbose -i --no-cache",
     "test:coverage": "jest --forceExit --coverage --verbose",
     "test:watch": "jest --watchAll",
-    "lint": "tsc --noEmit && eslint \"src/**/*.{js,ts}\"",
-    "lint:fix": "tsc --noEmit && eslint \"src/**/*.{js,ts}\" --fix"
+    "lint": "tsc --noEmit && eslint \"{src,client}/**/*.{js,ts}\"",
+    "lint:fix": "tsc --noEmit && eslint \"{src,client}/**/*.{js,ts}\" --fix"
   },
   "repository": {
     "type": "git",
