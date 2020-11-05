@@ -55,6 +55,8 @@ var methods = {
 
 ## development
 * `npm install` or `yarn import`
+* `npm run build`
+* `yarn run live-server` 
 
 ## deploy
 * npm publish --access public 
