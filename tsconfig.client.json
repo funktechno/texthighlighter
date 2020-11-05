@@ -4,7 +4,8 @@
       "rootDir": "./src",
       // "sourceRoot": "./src",
       "outFile": "dist/Highlighter.js",
-      "target": "es5"
+      "target": "es5",
+      "moduleResolution": "node"
   },
   "exclude": [
       "node_modules",

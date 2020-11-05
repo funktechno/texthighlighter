@@ -45,11 +45,17 @@ jobs:
         name: Report-CodeCoverage
         path: coverage
     - run: npm run build
-    - name: build lib
+    - name: build lib,dist
       run: |
           npm run build
-    - name: upload build
+          npm run build:client
+    - name: upload lib
       uses: actions/upload-artifact@v1
       with:
         name: lib
         path: lib
+    - name: upload dist
+      uses: actions/upload-artifact@v1
+      with:
+        name: dist
+        path: dist
