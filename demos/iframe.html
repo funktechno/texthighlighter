@@ -12,7 +12,7 @@
     <script type="text/javascript" src="assets/rainbow-custom.min.js"></script>
 
     <script type="text/javascript" src="assets/ColorPicker.js"></script>
-    <script type="text/javascript" src="../dist/Highlighter.js"></script>
+    <script type="text/javascript" src="../dist/TextHighlighter.js"></script>
 </head>
 <body>
 <div class="view">
@@ -47,7 +47,7 @@ iframe.onload = function () {
     </div>
 </div>
 <div id="footer">
-    Copyright &copy; 2011-2014 by mirz. All Rights Reserved.
+    Copyright &copy; 2020-<span id="currentYear"></span> by lastlink. All Rights Reserved.
 </div>
 
 <script type="text/javascript">
@@ -71,6 +71,7 @@ iframe.onload = function () {
         iframe.src = 'iframe-content.html';
     })();
 </script>
+<script type="text/javascript" src="assets/setYear.js"></script>
 
 </body>
 </html>

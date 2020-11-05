@@ -12,7 +12,7 @@
     <script type="text/javascript" src="assets/rainbow-custom.min.js"></script>
 
     <script type="text/javascript" src="assets/ColorPicker.js"></script>
-    <script type="text/javascript" src="../dist/Highlighter.js"></script>
+    <script type="text/javascript" src="../dist/TextHighlighter.js"></script>
 </head>
 <body>
     <div class="view">
@@ -151,7 +151,7 @@ deserializeBtn.onclick = function () {
         </div>
     </div>
     <div id="footer">
-        Copyright &copy; 2011-2014 by mirz. All Rights Reserved.
+        Copyright &copy; 2020-<span id="currentYear"></span> by lastlink. All Rights Reserved.
     </div>
 
     <script type="text/javascript">
@@ -161,29 +161,39 @@ deserializeBtn.onclick = function () {
                 deserializeBtn  = document.getElementById('deserialize');
             var sandbox = document.getElementById('sandbox');
             var colors = new ColorPicker(document.querySelector('.color-picker'));
-            var hltr = new TextHighlighter(sandbox);
             var serialized = '';
+            var options = {}
+            options.color = colors.color;
+
+            sandbox.addEventListener("mouseup", e => {
+                TextHighlighter.doHighlight(sandbox, true, options)
+            });
+
+            sandbox.addEventListener("touchend", e => {
+                TextHighlighter.doHighlight(sandbox, true, options)
+            });
 
             colors.onColorChange(function (color) {
-                hltr.setColor(color);
+                options.color = color;
             });
 
             removeBtn.addEventListener('click', function () {
-                hltr.removeHighlights();
+                TextHighlighter.removeHighlights(sandbox);
             });
 
             serializeBtn.addEventListener('click', function () {
-                serialized = hltr.serializeHighlights();
+                serialized = TextHighlighter.serializeHighlights(sandbox);
                 console.log(serialized);
-                hltr.removeHighlights();
+                TextHighlighter.removeHighlights(sandbox);
             });
 
             deserializeBtn.addEventListener('click', function () {
-                hltr.removeHighlights();
-                hltr.deserializeHighlights(serialized);
+                TextHighlighter.removeHighlights(sandbox);
+                TextHighlighter.deserializeHighlights(sandbox, serialized);
             });
         })();
     </script>
+    <script type="text/javascript" src="assets/setYear.js"></script>
 
 </body>
 </html>
