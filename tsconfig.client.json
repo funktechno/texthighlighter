@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+      "module": "amd",
+      "rootDir": "./src",
+      // "sourceRoot": "./src",
+      "outFile": "dist/Highlighter.js",
+      "target": "es5"
+  },
+  "exclude": [
+      "node_modules",
+      "dist",
+  ]
+}

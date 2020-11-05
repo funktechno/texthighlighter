@@ -8,6 +8,7 @@
   ],
   "scripts": {
     "build": "tsc",
+    "build:client": "tsc -p tsconfig.client.json",
     "prepare": "npm run build",
     "prepublishOnly": "npm test && npm run lint",
     "preversion": "npm run lint",
