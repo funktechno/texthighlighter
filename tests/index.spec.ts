@@ -2,8 +2,10 @@
  * @jest-environment jsdom
  */
 import { doHighlight, deserializeHighlights, serializeHighlights, removeHighlights } from "../src/index";
-describe("doHighlight", () => {
-  test("mock test", () => {
+import { getExpected, updateExpected } from "./utils/helper";
+const dataSource = "doHighlight";
+describe("doHighlight", async () => {
+  test("mock test", async () => {
     expect(true).toBe(true);// Set up our document body
     document.body.innerHTML =
       "<div id=\"sandbox\">" +
@@ -39,7 +41,16 @@ describe("doHighlight", () => {
     const domEle: HTMLElement | null = document.getElementById("sandbox");
     // const d = deserializeHighlights(domEle, tmp);
     const result = serializeHighlights(domEle);
+
+    const dataKey = "emptyHighlights";
+
+    const expectedResult = await getExpected(dataSource,dataKey);
+    if(result != expectedResult) {
+      await updateExpected(dataSource, dataKey, result);
+    }
+
     console.log(result);
+    expect(result).toBe(expectedResult);
     // expect(Greeter("Carl")).toBe("Hello Carl");
 
   });
