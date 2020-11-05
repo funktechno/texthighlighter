@@ -53,6 +53,9 @@ var methods = {
 
 ```
 
+## development
+* `npm install` or `yarn import`
+
 ## deploy
 * npm publish --access public 
 
@@ -61,3 +64,4 @@ var methods = {
   * works where it's being used (in a vue ts project)
 * [ ] bring over demos and examples
 * [ ] improve unit tests
+  * [x] pipeline
