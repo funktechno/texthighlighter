@@ -8,7 +8,7 @@
   ],
   "scripts": {
     "build": "tsc",
-    "build:client": "tsc -p tsconfig.client.json",
+    "build:client": "browserify src/index.ts -p [ tsify --noImplicitAny ] > dist/TextHighlighter.js",
     "prepare": "npm run build",
     "prepublishOnly": "npm test && npm run lint",
     "preversion": "npm run lint",
@@ -50,6 +50,7 @@
     "@types/node": "^14.14.6",
     "@typescript-eslint/eslint-plugin": "^2.24.0",
     "@typescript-eslint/parser": "^2.24.0",
+    "browserify": "^17.0.0",
     "eslint": "^6.8.0",
     "gulp": "^4.0.2",
     "gulp-typescript": "^6.0.0-alpha.1",
@@ -59,6 +60,7 @@
     "live-server": "^1.2.1",
     "ts-jest": "^26.1.1",
     "ts-loader": "^6.2.2",
+    "tsify": "^5.0.2",
     "typescript": "^3.9.7"
   },
   "dependencies": {
