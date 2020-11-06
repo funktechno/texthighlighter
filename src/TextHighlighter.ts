@@ -1,4 +1,5 @@
 import { optionsImpl } from "./types";
+import { bindEvents, defaults, dom } from "./Utils";
 
 interface TextHighlighterSelf {
     el?: HTMLElement;
@@ -21,9 +22,12 @@ const TextHighlighter: TextHighlighterType = function (this: TextHighlighterSelf
         contextClass: "highlighter-context",
         onRemoveHighlight: function () { return true; },
         onBeforeHighlight: function () { return true; },
-        onAfterHighlight: function () { }
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        onAfterHighlight: function (...e: any[]) {
+            return true;
+        }
     });
-    if (this.options)
+    if (this.options && this.options.contextClass)
         dom(this.el).addClass(this.options.contextClass);
     bindEvents(this.el, this);
 };

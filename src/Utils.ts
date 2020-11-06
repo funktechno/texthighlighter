@@ -187,6 +187,16 @@ function refineRangeBoundaries(range: Range) {
   };
 }
 
+export function bindEvents(el: HTMLElement, scope: any) {
+  el.addEventListener("mouseup", scope.highlightHandler.bind(scope));
+  el.addEventListener("touchend", scope.highlightHandler.bind(scope));
+}
+
+export function unbindEvents(el: HTMLElement, scope: any) {
+  el.removeEventListener("mouseup", scope.highlightHandler.bind(scope));
+  el.removeEventListener("touchend", scope.highlightHandler.bind(scope));
+}
+
 /**
  * Utility functions to make DOM manipulation easier.
  * @param {Node|HTMLElement} [el] - base DOM element to manipulate
