@@ -1,5 +1,6 @@
+import { doHighlight, highlightRange } from "./Library";
 import { optionsImpl } from "./types";
-import { bindEvents, defaults, dom } from "./Utils";
+import { bindEvents, defaults, dom, unbindEvents } from "./Utils";
 
 interface TextHighlighterSelf {
     el?: HTMLElement;
@@ -31,8 +32,27 @@ const TextHighlighter: TextHighlighterType = function (this: TextHighlighterSelf
         dom(this.el).addClass(this.options.contextClass);
     bindEvents(this.el, this);
 };
-// class TextHighlighter:TextHighlighterType{
 
-// }
+/**
+ * Permanently disables highlighting.
+ * Unbinds events and remove context element class.
+ * @memberof TextHighlighter
+ */
+TextHighlighter.prototype.destroy = function () {
+    unbindEvents(this.el, this);
+    dom(this.el).removeClass(this.options.contextClass);
+};
+
+TextHighlighter.prototype.highlightHandler = function () {
+    this.doHighlight();
+};
+
+TextHighlighter.prototype.doHighlight = function (keepRange: boolean) {
+    doHighlight(this.el, keepRange, this.options);
+};
+
+TextHighlighter.prototype.highlightRange = function (range: Range, wrapper: { cloneNode: (arg0: boolean) => any}) {
+    highlightRange(this.el,range,wrapper);
+};
 
 export { TextHighlighter };
