@@ -1,63 +1,3 @@
-interface ie_HTMLElement extends HTMLElement {
-    createTextRange(): TextRange;
-}
-interface TextRange {
-    collapse(arg0: boolean): any;
-    select(): void;
-    parentElement(): any;
-    findText(text: any, arg1: number, arg2: number): any;
-    moveToElementText(el: any): any;
-}
-interface H_Window extends Window {
-    find(text: any, caseSens: any): boolean;
-}
-declare class highlightI {
-    highlightHandler: any;
-    options: optionsImpl | undefined;
-    el: HTMLElement | undefined;
-}
-interface optionsI {
-    color?: string;
-    highlightedClass?: string;
-    contextClass?: string;
-    onRemoveHighlight?: {
-        (...e: any[]): boolean;
-    };
-    onBeforeHighlight?: {
-        (...e: any[]): boolean;
-    };
-    onAfterHighlight?: {
-        (...e: any[]): boolean;
-    };
-}
-declare class optionsImpl implements optionsI {
-    color?: string | undefined;
-    highlightedClass?: string | undefined;
-    contextClass?: string | undefined;
-    onRemoveHighlight?: {
-        (...e: any[]): boolean;
-    };
-    onBeforeHighlight?: {
-        (...e: any[]): boolean;
-    };
-    onAfterHighlight?: {
-        (...e: any[]): boolean;
-    };
-}
-declare class paramsImp {
-    container?: HTMLElement;
-    andSelf?: boolean;
-    grouped?: any;
-}
-interface hlDescriptorI {
-    wrapper: string;
-    textContent: string;
-    color: string;
-    hlpaths?: number[];
-    path: string;
-    offset: number;
-    length: number;
-}
 declare const /**
    * Attribute added by default to every highlight.
    * @type {string}
@@ -235,4 +175,4 @@ declare function haveSameColor(a: Node, b: Node): boolean;
  * @param {boolean} descending - order of sort.
  */
 declare function sortByDepth(arr: any, descending: any): void;
-export { DATA_ATTR, TIMESTAMP_ATTR, NODE_TYPE, IGNORE_TAGS, dom, refineRangeBoundaries, sortByDepth, unique, haveSameColor, optionsI, highlightI, H_Window, ie_HTMLElement, TextRange, defaults, groupHighlights, activator, optionsImpl, paramsImp, hlDescriptorI };
+export { DATA_ATTR, TIMESTAMP_ATTR, NODE_TYPE, IGNORE_TAGS, dom, refineRangeBoundaries, sortByDepth, unique, haveSameColor, defaults, groupHighlights, activator };
