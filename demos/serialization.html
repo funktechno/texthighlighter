@@ -33,17 +33,18 @@
 
         <div class="code shadow">
 <pre><code data-language="javascript">
-var serialized;
+var hltr = new TextHighlighter(sandbox),
+serialized;
 
-serializeBtn.addEventListener('click', function () {
-    serialized = TextHighlighter.serializeHighlights(sandbox);
+serializeBtn.onclick = function () {
+    serialized = hltr.serializeHighlights();
     console.log(serialized);
-    TextHighlighter.removeHighlights(sandbox);
+    hltr.removeHighlights();
 });
 
-deserializeBtn.addEventListener('click', function () {
-    TextHighlighter.removeHighlights(sandbox);
-    TextHighlighter.deserializeHighlights(sandbox, serialized);
+deserializeBtn.onclick = function () {
+    hltr.removeHighlights();
+    hltr.deserializeHighlights(serialized);
 });
 </code></pre>
         </div>
@@ -160,35 +161,26 @@ deserializeBtn.addEventListener('click', function () {
                 deserializeBtn  = document.getElementById('deserialize');
             var sandbox = document.getElementById('sandbox');
             var colors = new ColorPicker(document.querySelector('.color-picker'));
+            var hltr = new TextHighlighter(sandbox);
             var serialized = '';
-            var options = {}
-            options.color = colors.color;
-
-            sandbox.addEventListener("mouseup", e => {
-                TextHighlighter.doHighlight(sandbox, true, options)
-            });
-
-            sandbox.addEventListener("touchend", e => {
-                TextHighlighter.doHighlight(sandbox, true, options)
-            });
 
             colors.onColorChange(function (color) {
-                options.color = color;
+                hltr.setColor(color);
             });
 
             removeBtn.addEventListener('click', function () {
-                TextHighlighter.removeHighlights(sandbox);
+                hltr.removeHighlights();
             });
 
             serializeBtn.addEventListener('click', function () {
-                serialized = TextHighlighter.serializeHighlights(sandbox);
+                serialized = hltr.serializeHighlights();
                 console.log(serialized);
-                TextHighlighter.removeHighlights(sandbox);
+                hltr.removeHighlights();
             });
 
             deserializeBtn.addEventListener('click', function () {
-                TextHighlighter.removeHighlights(sandbox);
-                TextHighlighter.deserializeHighlights(sandbox, serialized);
+                hltr.removeHighlights();
+                hltr.deserializeHighlights(serialized);
             });
         })();
     </script>

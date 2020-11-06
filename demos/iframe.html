@@ -32,13 +32,9 @@
 var iframe = document.querySelector('iframe');
 
 iframe.onload = function () {
-    iframe.contentDocument.body.addEventListener("mouseup", e => {
-        TextHighlighter.doHighlight(iframe.contentDocument.body, true, options)
-    });
-
-    iframe.contentDocument.body.addEventListener("touchend", e => {
-        TextHighlighter.doHighlight(iframe.contentDocument.body, true, options)
-    });
+    var hltr = new TextHighlighter(
+        iframe.contentDocument.body
+    );
 };
 </code></pre>
     </div>
@@ -58,36 +54,19 @@ iframe.onload = function () {
     (function () {
         var removeBtn = document.getElementById('remove'),
             iframe = document.querySelector('iframe'),
-            colors = new ColorPicker(document.querySelector('.color-picker'));
+            colors = new ColorPicker(document.querySelector('.color-picker')),
+            hltr;
 
         iframe.onload = function () {
-            var options = {}
-            options.color = colors.color;
-
-            iframe.contentDocument.body.addEventListener("mouseup", e => {
-                TextHighlighter.doHighlight(iframe.contentDocument.body, true, options)
-            });
-
-            iframe.contentDocument.body.addEventListener("touchend", e => {
-                TextHighlighter.doHighlight(iframe.contentDocument.body, true, options)
-            });
+            hltr = new TextHighlighter(iframe.contentDocument.body);
 
             colors.onColorChange(function (color) {
-                options.color = color;
+                hltr.setColor(color);
             });
 
             removeBtn.addEventListener('click', function () {
-                TextHighlighter.removeHighlights(iframe.contentDocument.body);
+                hltr.removeHighlights();
             });
-            // hltr = new TextHighlighter(iframe.contentDocument.body);
-
-            // // colors.onColorChange(function (color) {
-            // //     hltr.setColor(color);
-            // // });
-
-            // // removeBtn.addEventListener('click', function () {
-            // //     hltr.removeHighlights();
-            // // });
         };
         iframe.src = 'iframe-content.html';
     })();
