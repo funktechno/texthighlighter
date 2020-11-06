@@ -69,7 +69,8 @@ TextHighlighter.prototype.getColor = function () {
 };
 
 TextHighlighter.prototype.removeHighlights = function (element: HTMLElement) {
-    removeHighlights(element, this.options);
+    const container = element || this.el;
+    removeHighlights(container, this.options);
 };
 
 TextHighlighter.prototype.getHighlights = function (params?: paramsImp) {

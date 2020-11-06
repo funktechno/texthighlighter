@@ -609,7 +609,8 @@ TextHighlighter.prototype.getColor = function () {
     return this.options.color;
 };
 TextHighlighter.prototype.removeHighlights = function (element) {
-    Library_1.removeHighlights(element, this.options);
+    var container = element || this.el;
+    Library_1.removeHighlights(container, this.options);
 };
 TextHighlighter.prototype.getHighlights = function (params) {
     Library_1.getHighlights(this.el, params);
