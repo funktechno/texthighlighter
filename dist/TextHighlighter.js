@@ -4,14 +4,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var src_1 = require("../src");
 window.TextHighlighter = src_1.TextHighlighter;
 
-},{"../src":4}],2:[function(require,module,exports){
+},{"../src":5}],2:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.highlightRange = exports.createWrapper = exports.optionsImpl = exports.removeHighlights = exports.serializeHighlights = exports.deserializeHighlights = exports.doHighlight = void 0;
+exports.highlightRange = exports.createWrapper = exports.removeHighlights = exports.serializeHighlights = exports.deserializeHighlights = exports.doHighlight = exports.getHighlights = exports.find = exports.normalizeHighlights = exports.mergeSiblingHighlights = exports.flattenNestedHighlights = void 0;
 // TextHighLighterv2 library
 // Port by: lastlink <https://github.com/lastlink/>
 var types_1 = require("./types");
-Object.defineProperty(exports, "optionsImpl", { enumerable: true, get: function () { return types_1.optionsImpl; } });
 var Utils_1 = require("./Utils");
 /**
  * Creates wrapper for highlights.
@@ -117,7 +116,7 @@ var isHighlight = function (el) {
  * @param {Array} highlights - highlights to flatten.
  * @memberof TextHighlighter
  */
-var flattenNestedHighlights = function (highlights) {
+exports.flattenNestedHighlights = function (highlights) {
     var again;
     // self = this;
     Utils_1.sortByDepth(highlights, true);
@@ -168,7 +167,7 @@ var flattenNestedHighlights = function (highlights) {
  * @param highlights
  * @memberof TextHighlighter
  */
-var mergeSiblingHighlights = function (highlights) {
+exports.mergeSiblingHighlights = function (highlights) {
     //   const self = this;
     var shouldMerge = function (current, node) {
         return (node &&
@@ -202,10 +201,10 @@ var mergeSiblingHighlights = function (highlights) {
  * input highlights.
  * @memberof TextHighlighter
  */
-var normalizeHighlights = function (highlights) {
+exports.normalizeHighlights = function (highlights) {
     var normalizedHighlights;
-    flattenNestedHighlights(highlights);
-    mergeSiblingHighlights(highlights);
+    exports.flattenNestedHighlights(highlights);
+    exports.mergeSiblingHighlights(highlights);
     // omit removed nodes
     normalizedHighlights = highlights.filter(function (hl) {
         return hl.parentElement ? hl : null;
@@ -267,7 +266,7 @@ var doHighlight = function (el, keepRange, options) {
         createdHighlights = highlightRange(el, range, wrapper);
         if (createdHighlights.length > 0)
             highlightMade = true;
-        normalizedHighlights = normalizeHighlights(createdHighlights);
+        normalizedHighlights = exports.normalizeHighlights(createdHighlights);
         if (options.onAfterHighlight)
             options.onAfterHighlight(range, normalizedHighlights, timestamp);
     }
@@ -355,6 +354,33 @@ var deserializeHighlights = function (el, json) {
     return highlights;
 };
 exports.deserializeHighlights = deserializeHighlights;
+exports.find = function (el, text, caseSensitive, options) {
+    var wnd = Utils_1.dom(el).getWindow();
+    if (wnd) {
+        var scrollX_1 = wnd.scrollX, scrollY_1 = wnd.scrollY, caseSens = (typeof caseSensitive === "undefined" ? true : caseSensitive);
+        // dom(el).removeAllRanges();
+        // const test = wnd.innerh
+        if ("find" in wnd) {
+            while (wnd.find(text, caseSens)) {
+                doHighlight(el, true, options);
+            }
+        }
+        else if (wnd.document.body.createTextRange) {
+            var textRange = wnd.document.body.createTextRange();
+            textRange.moveToElementText(el);
+            while (textRange.findText(text, 1, caseSens ? 4 : 0)) {
+                if (!Utils_1.dom(el).contains(textRange.parentElement()) && textRange.parentElement() !== el) {
+                    break;
+                }
+                textRange.select();
+                doHighlight(el, true, options);
+                textRange.collapse(false);
+            }
+        }
+        Utils_1.dom(el).removeAllRanges();
+        wnd.scrollTo(scrollX_1, scrollY_1);
+    }
+};
 /**
  * Returns highlights from given container.
  * @param params
@@ -368,7 +394,7 @@ exports.deserializeHighlights = deserializeHighlights;
  * @returns {Array} - array of highlights.
  * @memberof TextHighlighter
  */
-var getHighlights = function (el, params) {
+exports.getHighlights = function (el, params) {
     if (!params)
         params = new types_1.paramsImp();
     params = Utils_1.defaults(params, {
@@ -396,7 +422,7 @@ var getHighlights = function (el, params) {
 var serializeHighlights = function (el) {
     if (!el)
         return;
-    var highlights = getHighlights(el), refEl = el, hlDescriptors = [];
+    var highlights = exports.getHighlights(el), refEl = el, hlDescriptors = [];
     if (!highlights)
         return;
     function getElementPath(el, refElement) {
@@ -451,7 +477,7 @@ var serializeHighlights = function (el) {
 };
 exports.serializeHighlights = serializeHighlights;
 var removeHighlights = function (element, options) {
-    var container = element, highlights = getHighlights(element, { container: container });
+    var container = element, highlights = exports.getHighlights(element, { container: container });
     // self = this;
     if (!highlights)
         return;
@@ -517,7 +543,94 @@ var removeHighlights = function (element, options) {
 };
 exports.removeHighlights = removeHighlights;
 
-},{"./Utils":3,"./types":5}],3:[function(require,module,exports){
+},{"./Utils":4,"./types":6}],3:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.TextHighlighter = void 0;
+var Library_1 = require("./Library");
+var Utils_1 = require("./Utils");
+var TextHighlighter = function (element, options) {
+    if (!element) {
+        throw "Missing anchor element";
+    }
+    this.el = element;
+    this.options = Utils_1.defaults(options, {
+        color: "#ffff7b",
+        highlightedClass: "highlighted",
+        contextClass: "highlighter-context",
+        onRemoveHighlight: function () { return true; },
+        onBeforeHighlight: function () { return true; },
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        onAfterHighlight: function () {
+            var e = [];
+            for (var _i = 0; _i < arguments.length; _i++) {
+                e[_i] = arguments[_i];
+            }
+            return true;
+        }
+    });
+    if (this.options && this.options.contextClass)
+        Utils_1.dom(this.el).addClass(this.options.contextClass);
+    Utils_1.bindEvents(this.el, this);
+    return this;
+};
+exports.TextHighlighter = TextHighlighter;
+/**
+ * Permanently disables highlighting.
+ * Unbinds events and remove context element class.
+ * @memberof TextHighlighter
+ */
+TextHighlighter.prototype.destroy = function () {
+    Utils_1.unbindEvents(this.el, this);
+    Utils_1.dom(this.el).removeClass(this.options.contextClass);
+};
+TextHighlighter.prototype.highlightHandler = function () {
+    this.doHighlight();
+};
+TextHighlighter.prototype.doHighlight = function (keepRange) {
+    Library_1.doHighlight(this.el, keepRange, this.options);
+};
+TextHighlighter.prototype.highlightRange = function (range, wrapper) {
+    Library_1.highlightRange(this.el, range, wrapper);
+};
+TextHighlighter.prototype.normalizeHighlights = function (highlights) {
+    Library_1.normalizeHighlights(highlights);
+};
+TextHighlighter.prototype.flattenNestedHighlights = function (highlights) {
+    Library_1.flattenNestedHighlights(highlights);
+};
+TextHighlighter.prototype.mergeSiblingHighlights = function (highlights) {
+    Library_1.mergeSiblingHighlights(highlights);
+};
+TextHighlighter.prototype.setColor = function (color) {
+    this.options.color = color;
+};
+TextHighlighter.prototype.getColor = function () {
+    return this.options.color;
+};
+TextHighlighter.prototype.removeHighlights = function (element) {
+    Library_1.removeHighlights(element, this.options);
+};
+TextHighlighter.prototype.getHighlights = function (params) {
+    Library_1.getHighlights(this.el, params);
+};
+TextHighlighter.prototype.isHighlight = function (el) {
+    return el && el.nodeType === Utils_1.NODE_TYPE.ELEMENT_NODE && el.hasAttribute(Utils_1.DATA_ATTR);
+};
+TextHighlighter.prototype.serializeHighlights = function () {
+    Library_1.serializeHighlights(this.el);
+};
+TextHighlighter.prototype.deserializeHighlights = function (json) {
+    Library_1.deserializeHighlights(this.el, json);
+};
+TextHighlighter.prototype.find = function (text, caseSensitive) {
+    Library_1.find(this.el, text, caseSensitive);
+};
+TextHighlighter.createWrapper = function (options) {
+    Library_1.createWrapper(options);
+};
+
+},{"./Library":2,"./Utils":4}],4:[function(require,module,exports){
 "use strict";
 // highlight extensions
 // eslint-disable-next-line @typescript-eslint/class-name-casing,@typescript-eslint/camelcase
@@ -527,7 +640,7 @@ exports.removeHighlights = removeHighlights;
 //   createTextRange(): TextRange;
 // }
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.activator = exports.groupHighlights = exports.defaults = exports.haveSameColor = exports.unique = exports.sortByDepth = exports.refineRangeBoundaries = exports.dom = exports.IGNORE_TAGS = exports.NODE_TYPE = exports.TIMESTAMP_ATTR = exports.DATA_ATTR = void 0;
+exports.activator = exports.groupHighlights = exports.defaults = exports.haveSameColor = exports.unique = exports.sortByDepth = exports.refineRangeBoundaries = exports.dom = exports.IGNORE_TAGS = exports.NODE_TYPE = exports.TIMESTAMP_ATTR = exports.DATA_ATTR = exports.unbindEvents = exports.bindEvents = void 0;
 // eslint-disable-next-line @typescript-eslint/class-name-casing
 // interface H_Node extends Node {
 //   splitText(endOffset: number): any;
@@ -690,6 +803,16 @@ function refineRangeBoundaries(range) {
     };
 }
 exports.refineRangeBoundaries = refineRangeBoundaries;
+function bindEvents(el, scope) {
+    el.addEventListener("mouseup", scope.highlightHandler.bind(scope));
+    el.addEventListener("touchend", scope.highlightHandler.bind(scope));
+}
+exports.bindEvents = bindEvents;
+function unbindEvents(el, scope) {
+    el.removeEventListener("mouseup", scope.highlightHandler.bind(scope));
+    el.removeEventListener("touchend", scope.highlightHandler.bind(scope));
+}
+exports.unbindEvents = unbindEvents;
 /**
  * Utility functions to make DOM manipulation easier.
  * @param {Node|HTMLElement} [el] - base DOM element to manipulate
@@ -944,7 +1067,7 @@ function sortByDepth(arr, descending) {
 }
 exports.sortByDepth = sortByDepth;
 
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TextHighlighter = exports.highlightRange = exports.createWrapper = exports.optionsImpl = exports.removeHighlights = exports.serializeHighlights = exports.deserializeHighlights = exports.doHighlight = void 0;
@@ -953,18 +1076,14 @@ Object.defineProperty(exports, "doHighlight", { enumerable: true, get: function 
 Object.defineProperty(exports, "deserializeHighlights", { enumerable: true, get: function () { return Library_1.deserializeHighlights; } });
 Object.defineProperty(exports, "serializeHighlights", { enumerable: true, get: function () { return Library_1.serializeHighlights; } });
 Object.defineProperty(exports, "removeHighlights", { enumerable: true, get: function () { return Library_1.removeHighlights; } });
-Object.defineProperty(exports, "optionsImpl", { enumerable: true, get: function () { return Library_1.optionsImpl; } });
 Object.defineProperty(exports, "createWrapper", { enumerable: true, get: function () { return Library_1.createWrapper; } });
 Object.defineProperty(exports, "highlightRange", { enumerable: true, get: function () { return Library_1.highlightRange; } });
-exports.TextHighlighter = {
-    doHighlight: Library_1.doHighlight,
-    deserializeHighlights: Library_1.deserializeHighlights,
-    serializeHighlights: Library_1.serializeHighlights,
-    removeHighlights: Library_1.removeHighlights,
-    optionsImpl: Library_1.optionsImpl
-};
+var TextHighlighter_1 = require("./TextHighlighter");
+Object.defineProperty(exports, "TextHighlighter", { enumerable: true, get: function () { return TextHighlighter_1.TextHighlighter; } });
+var types_1 = require("./types");
+Object.defineProperty(exports, "optionsImpl", { enumerable: true, get: function () { return types_1.optionsImpl; } });
 
-},{"../src/Library":2}],5:[function(require,module,exports){
+},{"../src/Library":2,"./TextHighlighter":3,"./types":6}],6:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.paramsImp = exports.optionsImpl = exports.highlightI = void 0;

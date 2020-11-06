@@ -6,6 +6,13 @@ export interface TextHighlighterI {
     optionsImpl: any;
 }
 
+export interface TextHighlighterSelf {
+    el?: HTMLElement;
+    options?: optionsImpl;
+}
+
+export type TextHighlighterType = (element: HTMLElement, options: optionsImpl) => void;
+
 export interface TextRange {
     collapse(arg0: boolean): any;
     select(): void;

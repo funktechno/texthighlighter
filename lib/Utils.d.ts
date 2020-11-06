@@ -47,6 +47,8 @@ declare function refineRangeBoundaries(range: Range): {
     endContainer: Node | null;
     goDeeper: boolean;
 };
+export declare function bindEvents(el: HTMLElement, scope: any): void;
+export declare function unbindEvents(el: HTMLElement, scope: any): void;
 /**
  * Utility functions to make DOM manipulation easier.
  * @param {Node|HTMLElement} [el] - base DOM element to manipulate
