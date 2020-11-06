@@ -728,6 +728,8 @@ exports.groupHighlights = groupHighlights;
  * @returns {object}
  */
 function defaults(obj, source) {
+    if (obj == null)
+        obj = {};
     for (var prop in source) {
         if (Object.prototype.hasOwnProperty.call(source, prop) &&
             obj[prop] === void 0) {

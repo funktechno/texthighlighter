@@ -101,6 +101,8 @@ function groupHighlights(highlights: any) {
  * @returns {object}
  */
 function defaults<T>(obj: T, source: T): T {
+  if (obj == null)
+    obj = {} as T;
   for (const prop in source) {
     if (
       Object.prototype.hasOwnProperty.call(source, prop) &&

@@ -2,7 +2,7 @@ import { createWrapper, deserializeHighlights, doHighlight, find, flattenNestedH
 import { optionsImpl, paramsImp, TextHighlighterSelf, TextHighlighterType } from "./types";
 import { bindEvents, DATA_ATTR, defaults, dom, NODE_TYPE, unbindEvents } from "./Utils";
 
-const TextHighlighter: TextHighlighterType = function (this: TextHighlighterSelf, element: HTMLElement, options: optionsImpl) {
+const TextHighlighter: TextHighlighterType = function (this: TextHighlighterSelf, element: HTMLElement, options?: optionsImpl) {
 
     if (!element) {
         throw "Missing anchor element";
