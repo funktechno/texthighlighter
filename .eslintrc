@@ -20,7 +20,7 @@
     "@typescript-eslint/no-unused-vars": "warn",
     "@typescript-eslint/class-name-casing": "off"
   },
-  "ignorePatterns": ["src/TextHighlighter.js","lib/*","dist/*"],
+  "ignorePatterns": ["src/TextHighlighter.js","lib/*","dist/*","archived"],
   "overrides": [
     {
       "files": [

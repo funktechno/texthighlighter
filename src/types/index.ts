@@ -1,10 +1,17 @@
-export interface TextHighlighterType {
+export interface TextHighlighterI {
     doHighlight: any;
     deserializeHighlights: any;
     serializeHighlights: any;
     removeHighlights: any;
     optionsImpl: any;
 }
+
+export interface TextHighlighterSelf {
+    el?: HTMLElement;
+    options?: optionsImpl;
+}
+
+export type TextHighlighterType = (element: HTMLElement, options: optionsImpl) => void;
 
 export interface TextRange {
     collapse(arg0: boolean): any;

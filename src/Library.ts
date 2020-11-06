@@ -147,7 +147,7 @@ const isHighlight = function (el: HTMLElement) {
  * @param {Array} highlights - highlights to flatten.
  * @memberof TextHighlighter
  */
-const flattenNestedHighlights = function (highlights: any[]) {
+export const flattenNestedHighlights = function (highlights: any[]) {
     let again;
     // self = this;
 
@@ -206,7 +206,7 @@ const flattenNestedHighlights = function (highlights: any[]) {
  * @param highlights
  * @memberof TextHighlighter
  */
-const mergeSiblingHighlights = function (highlights: any[]) {
+export const mergeSiblingHighlights = function (highlights: any[]) {
     //   const self = this;
 
     const shouldMerge = (current: Node, node: Node) => {
@@ -247,7 +247,7 @@ const mergeSiblingHighlights = function (highlights: any[]) {
  * input highlights.
  * @memberof TextHighlighter
  */
-const normalizeHighlights = function (highlights: any[]) {
+export const normalizeHighlights = function (highlights: any[]) {
     let normalizedHighlights;
 
     flattenNestedHighlights(highlights);
@@ -418,6 +418,39 @@ const deserializeHighlights = function (el: HTMLElement, json: string) {
     return highlights;
 };
 
+export const find = function (el: HTMLElement, text: string, caseSensitive: boolean, options?: optionsImpl) {
+    const wnd = dom(el).getWindow();
+    if (wnd) {
+        const scrollX = wnd.scrollX,
+            scrollY = wnd.scrollY,
+            caseSens = (typeof caseSensitive === "undefined" ? true : caseSensitive);
+
+        // dom(el).removeAllRanges();
+        // const test = wnd.innerh
+
+        if ("find" in wnd) {
+            while ((wnd as any).find(text, caseSens)) {
+                doHighlight(el, true, options);
+            }
+        } else if ((wnd.document.body as any).createTextRange) {
+            const textRange = (wnd.document.body as any).createTextRange();
+            textRange.moveToElementText(el);
+            while (textRange.findText(text, 1, caseSens ? 4 : 0)) {
+                if (!dom(el).contains(textRange.parentElement()) && textRange.parentElement() !== el) {
+                    break;
+                }
+
+                textRange.select();
+                doHighlight(el, true, options);
+                textRange.collapse(false);
+            }
+        }
+
+        dom(el).removeAllRanges();
+        wnd.scrollTo(scrollX, scrollY);
+    }
+};
+
 /**
  * Returns highlights from given container.
  * @param params
@@ -431,7 +464,7 @@ const deserializeHighlights = function (el: HTMLElement, json: string) {
  * @returns {Array} - array of highlights.
  * @memberof TextHighlighter
  */
-const getHighlights = function (el: HTMLElement, params?: paramsImp) {
+export const getHighlights = function (el: HTMLElement, params?: paramsImp) {
     if (!params) params = new paramsImp();
     params = defaults(params, {
         container: el,
@@ -598,7 +631,6 @@ export {
     deserializeHighlights,
     serializeHighlights,
     removeHighlights,
-    optionsImpl,
     createWrapper,
     highlightRange
 };

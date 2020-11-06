@@ -29,24 +29,15 @@
 
         <div class="code shadow">
 <pre><code data-language="javascript">
-var sandbox = document.getElementById('sandbox');
-var options = {}
-
-sandbox.addEventListener("mouseup", e => {
-    TextHighlighter.doHighlight(sandbox, true, options)
-});
-
-sandbox.addEventListener("touchend", e => {
-    TextHighlighter.doHighlight(sandbox, true, options)
-});
+var hltr = new TextHighlighter(sandbox);
 
 colors.onColorChange(function (color) {
-    options.color = color;
+    hltr.setColor(color);
 });
 
-removeBtn.addEventListener('click', function () {
-    TextHighlighter.removeHighlights(sandbox);
-});
+buttonRemove.onclick = function () {
+    hltr.removeHighlights();
+};
 </code></pre>
         </div>
 
@@ -160,23 +151,14 @@ removeBtn.addEventListener('click', function () {
             var removeBtn = document.getElementById('remove');
             var sandbox = document.getElementById('sandbox');
             var colors = new ColorPicker(document.querySelector('.color-picker'));
-            var options = {}
-            options.color = colors.color;
-
-            sandbox.addEventListener("mouseup", e => {
-                TextHighlighter.doHighlight(sandbox, true, options)
-            });
-
-            sandbox.addEventListener("touchend", e => {
-                TextHighlighter.doHighlight(sandbox, true, options)
-            });
+            var hltr = new TextHighlighter(sandbox);
 
             colors.onColorChange(function (color) {
-                options.color = color;
+                hltr.setColor(color);
             });
 
             removeBtn.addEventListener('click', function () {
-                TextHighlighter.removeHighlights(sandbox);
+                hltr.removeHighlights();
             });
         })();
     </script>

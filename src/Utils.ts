@@ -101,6 +101,8 @@ function groupHighlights(highlights: any) {
  * @returns {object}
  */
 function defaults<T>(obj: T, source: T): T {
+  if (obj == null)
+    obj = {} as T;
   for (const prop in source) {
     if (
       Object.prototype.hasOwnProperty.call(source, prop) &&
@@ -185,6 +187,16 @@ function refineRangeBoundaries(range: Range) {
     endContainer: endContainer,
     goDeeper: goDeeper
   };
+}
+
+export function bindEvents(el: HTMLElement, scope: any) {
+  el.addEventListener("mouseup", scope.highlightHandler.bind(scope));
+  el.addEventListener("touchend", scope.highlightHandler.bind(scope));
+}
+
+export function unbindEvents(el: HTMLElement, scope: any) {
+  el.removeEventListener("mouseup", scope.highlightHandler.bind(scope));
+  el.removeEventListener("touchend", scope.highlightHandler.bind(scope));
 }
 
 /**

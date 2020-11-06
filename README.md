@@ -71,6 +71,9 @@ var methods = {
 ## todo
 * [x] convert library to typescript
   * works where it's being used (in a vue ts project)
-* [ ] bring over demos and examples
+* [x] bring over demos and examples
 * [ ] improve unit tests
   * [x] pipeline
+  * [ ] bring over previous unit tests
+* [ ] extend highlights for more options
+  * [ ] whole element selection for comment support, or keeprange disabled
