@@ -1,5 +1,5 @@
-import { doHighlight, deserializeHighlights, serializeHighlights, removeHighlights, optionsImpl, createWrapper, highlightRange } from "../src/Library";
-import { TextHighlighterType } from "./types";
+import { doHighlight, deserializeHighlights, serializeHighlights, removeHighlights, createWrapper, highlightRange } from "../src/Library";
+import { optionsImpl, TextHighlighterI } from "./types";
 
 export {
     doHighlight,
@@ -11,7 +11,7 @@ export {
     highlightRange
 };
 
-export const TextHighlighter: TextHighlighterType = {
+export const TextHighlighter: TextHighlighterI = {
     doHighlight,
     deserializeHighlights,
     serializeHighlights,

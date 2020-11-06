@@ -1,4 +1,4 @@
-export interface TextHighlighterType {
+export interface TextHighlighterI {
     doHighlight: any;
     deserializeHighlights: any;
     serializeHighlights: any;

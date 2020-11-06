@@ -1,9 +1,9 @@
 // TextHighLighterv2 client
-import { TextHighlighterType } from "../src/types";
+import { TextHighlighterI } from "../src/types";
 import { TextHighlighter } from "../src";
 
 interface Window {
-    TextHighlighter: TextHighlighterType;
+    TextHighlighter: TextHighlighterI;
 }
 
 declare let window: Window;

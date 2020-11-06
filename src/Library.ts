@@ -598,7 +598,6 @@ export {
     deserializeHighlights,
     serializeHighlights,
     removeHighlights,
-    optionsImpl,
     createWrapper,
     highlightRange
 };
