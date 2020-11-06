@@ -82,7 +82,7 @@ TextHighlighter.prototype.isHighlight = function (el: HTMLElement) {
 };
 
 TextHighlighter.prototype.serializeHighlights = function () {
-    serializeHighlights(this.el);
+    return serializeHighlights(this.el);
 };
 
 TextHighlighter.prototype.deserializeHighlights = function (json: string) {

@@ -619,7 +619,7 @@ TextHighlighter.prototype.isHighlight = function (el) {
     return el && el.nodeType === Utils_1.NODE_TYPE.ELEMENT_NODE && el.hasAttribute(Utils_1.DATA_ATTR);
 };
 TextHighlighter.prototype.serializeHighlights = function () {
-    Library_1.serializeHighlights(this.el);
+    return Library_1.serializeHighlights(this.el);
 };
 TextHighlighter.prototype.deserializeHighlights = function (json) {
     Library_1.deserializeHighlights(this.el, json);
