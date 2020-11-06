@@ -1,74 +1,19 @@
 // highlight extensions
 // eslint-disable-next-line @typescript-eslint/class-name-casing,@typescript-eslint/camelcase
-type H_HTMLElement = HTMLElement;
+// type H_HTMLElement = HTMLElement;
 // eslint-disable-next-line @typescript-eslint/class-name-casing,@typescript-eslint/camelcase
-interface ie_HTMLElement extends HTMLElement {
-  createTextRange(): TextRange;
-}
+// interface ie_HTMLElement extends HTMLElement {
+//   createTextRange(): TextRange;
+// }
 
-interface TextRange {
-  collapse(arg0: boolean): any;
-  select(): void;
-  parentElement(): any;
-  findText(text: any, arg1: number, arg2: number): any;
-  moveToElementText(el: any): any;
-}
 // eslint-disable-next-line @typescript-eslint/class-name-casing
 // interface H_Node extends Node {
 //   splitText(endOffset: number): any;
 // }
 // eslint-disable-next-line @typescript-eslint/class-name-casing,@typescript-eslint/camelcase
-interface H_Window extends Window {
-  find(text: any, caseSens: any): boolean;
-}
-
-// eslint-disable-next-line @typescript-eslint/class-name-casing
-class highlightI {
-  highlightHandler: any;
-  options: optionsImpl | undefined;
-  el: HTMLElement | undefined;
-}
-// eslint-disable-next-line @typescript-eslint/class-name-casing
-interface optionsI {
-  color?: string;
-  highlightedClass?: string;
-  contextClass?: string;
-  onRemoveHighlight?: { (...e: any[]): boolean };
-  onBeforeHighlight?: { (...e: any[]): boolean };
-  onAfterHighlight?: { (...e: any[]): boolean };
-}
-// eslint-disable-next-line @typescript-eslint/class-name-casing
-class optionsImpl implements optionsI {
-  color?: string | undefined;
-  highlightedClass?: string | undefined;
-  contextClass?: string | undefined;
-  onRemoveHighlight?: { (...e: any[]): boolean };
-  onBeforeHighlight?: { (...e: any[]): boolean };
-  onAfterHighlight?: { (...e: any[]): boolean };
-  //   constructor() {}
-}
-
-// class containerI{
-//     querySelectorAll: (arg0: string): any;
-//     hasAttribute: (arg0: string) => any;
+// interface H_Window extends Window {
+//   find(text: any, caseSens: any): boolean;
 // }
-// eslint-disable-next-line @typescript-eslint/class-name-casing
-class paramsImp {
-  container?: HTMLElement;
-  andSelf?: boolean;
-  grouped?: any;
-}
-
-// eslint-disable-next-line @typescript-eslint/class-name-casing
-interface hlDescriptorI {
-  wrapper: string;
-  textContent: string;
-  color: string;
-  hlpaths?: number[];
-  path: string;
-  offset: number;
-  length: number;
-}
 
 const /**
    * Attribute added by default to every highlight.
@@ -539,18 +484,8 @@ export {
   sortByDepth,
   unique,
   haveSameColor,
-  optionsI,
-  highlightI,
-  // eslint-disable-next-line @typescript-eslint/class-name-casing,@typescript-eslint/camelcase
-  H_Window,
-  //   H_Node,
-  // eslint-disable-next-line @typescript-eslint/class-name-casing,@typescript-eslint/camelcase
-  ie_HTMLElement,
-  TextRange,
+  // eslint-disable-n
   defaults,
   groupHighlights,
-  activator,
-  optionsImpl,
-  paramsImp,
-  hlDescriptorI
+  activator
 };
