@@ -1,0 +1,307 @@
+body, .tag-list {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    color: #333;
+}
+pre,
+code {
+    font-family: "SF Mono", "Monaco", "Inconsolata", "Fira Mono", "Droid Sans Mono", "Source Code Pro", monospace;
+}
+a {
+    color: inherit;
+    text-decoration-skip: ink;
+}
+
+h1 {
+    font-size: 40px;
+    margin: 39px 0 0;
+}
+h2 {
+    font-size: 32px;
+    margin: 35px 0 0;
+}
+
+code {
+    font-size: 95%;
+}
+
+header,
+footer {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+article,
+section {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+article > header {
+    max-width: 700px;
+    padding: 35px 0 10px;
+}
+article blockquote,
+article ul,
+article ol,
+article p {
+    font-size: 21px;
+    margin-top: 10px;
+    font-family: "Apple Garamond", "Baskerville", "Georgia", "Times New Roman", "Roboto Slab", "Droid Serif", "Times", "Source Serif Pro", serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    line-height: 1.58;
+    letter-spacing: -.003em;
+}
+
+header {
+    height: 64px;
+    border-bottom: 1px solid transparent;
+    display: flex;
+    align-items: center;
+}
+body > header {
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+}
+header svg, header img {
+    height: 32px;
+}
+header > span {
+    flex-grow: 1;
+}
+header > svg {
+    height: 25px;
+    margin: 4px 12px 3px 11px;
+    cursor: pointer;
+}
+header > svg path {
+    fill: rgba(0, 0, 0, .44);
+}
+header > img {
+    border-radius: 50%;
+    margin-left: 8px;
+    cursor: pointer;
+}
+
+figure > img, figure > video {
+    width: 100%;
+}
+figcaption {
+    text-align: center;
+    font-style: italic;
+    margin: .25em 0 0;
+}
+
+.avatar {
+    height: 60px;
+    border-radius: 50%;
+}
+.author-info {
+    margin-left: 15px;
+}
+.author-info > a {
+    text-decoration: none;
+}
+.author-info > iframe {
+    vertical-align: middle;
+}
+.author-meta {
+    color: #8f8f8f;
+    font-size: 13px;
+    line-height: 1.4;
+    margin-top: 2px;
+}
+
+.share-this-popover {
+    font-size: 20px;
+}
+
+.note-reference {
+    display: none;
+}
+.note-reference > span {
+    position: absolute;
+    background: rgba(196, 196, 255, 0.35);
+}
+.note-box {
+    position: absolute;
+    left: calc(51% + 350px);
+    width: calc(49% - 350px);
+    max-width: 10em;
+    padding: 1em;
+    background: ivory;
+    border: 1px solid wheat;
+    border-radius: .2em;
+    box-sizing: border-box;
+}
+.note-toolbar {
+    margin: -.5em -1em -1em;
+    text-align: right;
+    opacity: 0;
+    line-height: 1;
+}
+.note-toolbar > button {
+    background: transparent;
+    color: gray;
+    border: none;
+    box-shadow: none;
+    padding: .25em;
+    line-height: 1;
+    font-size: 100%;
+    cursor: pointer;
+}
+.note-toolbar > button:hover {
+    background: rgba(0, 0, 0, .05);
+}
+.note-wrapper.is-selected .note-toolbar,
+.note-wrapper:hover .note-toolbar {
+    opacity: 1;
+}
+.note-wrapper.is-selected > .note-reference,
+.note-wrapper:hover > .note-reference {
+    display: block;
+}
+
+.social-list, .tag-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+.social-list li:first-child {
+    flex-grow: 1;
+}
+.social-list svg {
+    height: 29px;
+    margin: 10px 10px 0;
+}
+.tag-list > li {
+    margin: 0 8px 8px 0;
+    padding: 5px 10px;
+    font-size: 13px;
+    color: rgba(0, 0, 0, .6);
+    background: rgba(0, 0, 0, .05);
+    border-radius: 3px;
+}
+
+footer {
+    clear: both;
+    max-width: 700px;
+    padding: 20px;
+    margin: 10px auto 0;
+    border-top: 1px solid rgba(0, 0, 0, .05);
+    display: flex;
+}
+footer .author-info > a {
+    font-size: 18px;
+    font-weight: bold;
+}
+footer .author-meta {
+    font-size: 14px;
+}
+
+@media (max-width: 899px) {
+    h1 {
+        font-size: 32px;
+        margin: 31px 0 0;
+    }
+    h2 {
+        font-size: 28px;
+        margin: 28px 0 0;
+    }
+    article blockquote,
+    article ul,
+    article ol,
+    article p {
+        font-size: 18px;
+    }
+    header {
+        height: 56px;
+    }
+
+    .note-box {
+        left: 16px;
+        width: 10em;
+        max-width: none;
+        font-size: 14px;
+        transform: translate(-100%, 0);
+        transition: transform .3s;
+    }
+
+    .note-box::after {
+        content: "";
+        position: absolute;
+        right: 6px;
+        top: calc(50% - 9px);
+        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 2 12'><path fill='gray' d='M1,5A1 1 0 0 0 1,7M1,10A1 1 0 0 0 1,12 1 1 0 0 0 1,10M1,7A1 1 0 0 0 1,5M1,2A1 1 0 0 0 1,0 1 1 0 0 0 1,2'></path></svg>");
+        background-repeat: no-repeat;
+        background-size: contain;
+        width: 3px;
+        height: 18px;
+    }
+    .note-toolbar > button {
+        display: none;
+    }
+    .note-wrapper.is-selected > .note-box {
+       transform: translate(-16px, -100%);
+    }
+    .note-wrapper.is-selected > .note-box::after {
+        content: none;
+    }
+    .note-wrapper.is-selected .note-toolbar > button {
+        display: inline-block;
+    }
+}
+
+@keyframes bell {
+    0% { transform: rotate(0deg); }
+    5% { transform: rotate(-30deg); }
+    15% { transform: rotate(30deg); }
+    25% { transform: rotate(-20deg); }
+    35% { transform: rotate(20deg); }
+    45% { transform: rotate(-12deg); }
+    55% { transform: rotate(12deg); }
+    65% { transform: rotate(-7deg); }
+    75% { transform: rotate(7deg); }
+    85% { transform: rotate(-3deg); }
+    95% { transform: rotate(3deg); }
+    100% { transform: rotate(0deg); }
+}
+@keyframes crash {
+    0% { transform: translate(0, 0); }
+    10% { transform: translate(0, -5px); }
+    40% { transform: translate(0, 25px); }
+    80% { transform: translate(0, 50px); }
+    100% { transform: translate(0, 0); }
+}
+@keyframes beat {
+    0% { transform: scale(1); }
+    15% { transform: scale(.9); }
+    40% { transform: scale(1.3); }
+    90% { transform: scale(.9); }
+    100% { transform: scale(1); }
+}
+@keyframes zip {
+    0% { transform: scale(1); }
+    60% { transform: scale(-.2, 1); }
+    80% { transform: scale(.1, 1); }
+    100% { transform: scale(0, 1); }
+}
+@keyframes unzip {
+    0% { transform: scale(0, 1); }
+    100% { transform: scale(1); }
+}
+
+*:focus {
+    outline: none;
+    }
+    input:focus {
+    outline: #0099CC solid 2px;
+    }
+    input[type=submit]:focus{
+    outline: #669900 solid 2px;
+    }
+    a:focus {
+    outline: #0099FF dotted 1px;
+    }
