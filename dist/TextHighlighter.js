@@ -135,7 +135,7 @@ exports.flattenNestedHighlights = function (highlights) {
                                 again = true;
                             }
                         }
-                        if (!hl.previousSibling  && parentPrev) {
+                        if (!hl.previousSibling && parentPrev) {
                             var newLocal = parentPrev || parent;
                             if (newLocal) {
                                 Utils_1.dom(hl).insertAfter(newLocal);
