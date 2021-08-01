@@ -164,7 +164,7 @@ export const flattenNestedHighlights = function (highlights: any[]) {
 
                 if (isHighlight(parent)) {
                     if (!haveSameColor(parent, hl)) {
-                        if (!hl.nextSibling && parentNext && parent) {
+                        if (!hl.nextSibling && parentNext) {
                             const newLocal: any = parentNext || parent;
                             if (newLocal) {
                                 dom(hl).insertBefore(newLocal);
@@ -172,7 +172,7 @@ export const flattenNestedHighlights = function (highlights: any[]) {
                             }
                         }
 
-                        if (!hl.previousSibling) {
+                        if (!hl.previousSibling && parentPrev) {
                             const newLocal: any = parentPrev || parent;
                             if (newLocal) {
                                 dom(hl).insertAfter(newLocal);
