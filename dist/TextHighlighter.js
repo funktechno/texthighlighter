@@ -128,14 +128,14 @@ exports.flattenNestedHighlights = function (highlights) {
                 var parentPrev = parent.previousSibling, parentNext = parent.nextSibling;
                 if (isHighlight(parent)) {
                     if (!Utils_1.haveSameColor(parent, hl)) {
-                        if (!hl.nextSibling && parentNext && parent) {
+                        if (!hl.nextSibling && parentNext) {
                             var newLocal = parentNext || parent;
                             if (newLocal) {
                                 Utils_1.dom(hl).insertBefore(newLocal);
                                 again = true;
                             }
                         }
-                        if (!hl.previousSibling) {
+                        if (!hl.previousSibling  && parentPrev) {
                             var newLocal = parentPrev || parent;
                             if (newLocal) {
                                 Utils_1.dom(hl).insertAfter(newLocal);
