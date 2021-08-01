@@ -63,6 +63,8 @@ var methods = {
 ## development
 * `npm install` or `yarn import`
 * `npm run build`
+* `npm run build:client`
+* `npm run lint:fix`
 * `yarn run live-server` 
 
 ## deploy
