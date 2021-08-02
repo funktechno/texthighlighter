@@ -1,14 +1,14 @@
 {
   "name": "@funktechno/texthighlighter",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "a no dependency typescript supported tool for highlighting user selected content",
   "main": "index.js",
   "files": [
     "lib/**/*"
   ],
   "scripts": {
-    "build": "tsc",
-    "build:client": "browserify client/index.ts -p [ tsify --noImplicitAny ] > dist/TextHighlighter.js",
+    "build": "tsc && node build/replace",
+    "build:client": "browserify client/index.ts -p [ tsify --noImplicitAny ] > dist/TextHighlighter.js && node build/replace",
     "prepare": "npm run build",
     "prepublishOnly": "npm test && npm run lint",
     "preversion": "npm run lint",
@@ -54,6 +54,7 @@
     "jest": "^26.1.0",
     "jest-junit": "^12.0.0",
     "jest-serial-runner": "^1.1.0",
+    "replace-in-file": "^6.2.0",
     "ts-jest": "^26.1.1",
     "ts-loader": "^8.0.9",
     "tsify": "^5.0.2",
