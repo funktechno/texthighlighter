@@ -58,9 +58,7 @@
     "ts-jest": "^26.1.1",
     "ts-loader": "^8.0.9",
     "tsify": "^5.0.2",
-    "typescript": "^4.0.5"
-  },
-  "dependencies": {
+    "typescript": "^4.0.5",
     "ts-node": "^10.1.0"
   },
   "directories": {
