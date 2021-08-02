@@ -1079,7 +1079,7 @@ exports.sortByDepth = sortByDepth;
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TextHighlighter = exports.highlightRange = exports.createWrapper = exports.optionsImpl = exports.removeHighlights = exports.serializeHighlights = exports.deserializeHighlights = exports.doHighlight = void 0;
-var Library_1 = require("../src/Library");
+var Library_1 = require("./Library");
 Object.defineProperty(exports, "doHighlight", { enumerable: true, get: function () { return Library_1.doHighlight; } });
 Object.defineProperty(exports, "deserializeHighlights", { enumerable: true, get: function () { return Library_1.deserializeHighlights; } });
 Object.defineProperty(exports, "serializeHighlights", { enumerable: true, get: function () { return Library_1.serializeHighlights; } });
@@ -1091,7 +1091,7 @@ Object.defineProperty(exports, "TextHighlighter", { enumerable: true, get: funct
 var types_1 = require("./types");
 Object.defineProperty(exports, "optionsImpl", { enumerable: true, get: function () { return types_1.optionsImpl; } });
 
-},{"../src/Library":2,"./TextHighlighter":3,"./types":6}],6:[function(require,module,exports){
+},{"./Library":2,"./TextHighlighter":3,"./types":6}],6:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.paramsImp = exports.optionsImpl = exports.highlightI = void 0;

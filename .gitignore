@@ -5,3 +5,4 @@ coverage
 
 junit.xml
 yarn.lock
+.DS_Store
