@@ -44,7 +44,7 @@
   "homepage": "https://github.com/funktechno/texthighlighter#readme",
   "devDependencies": {
     "@types/eslint": "^7.2.4",
-    "@types/jest": "^26.0.4",
+    "@types/jest": "^27.4.1",
     "@types/node": "^16.4.7",
     "@typescript-eslint/eslint-plugin": "^2.24.0",
     "@typescript-eslint/parser": "^2.24.0",
