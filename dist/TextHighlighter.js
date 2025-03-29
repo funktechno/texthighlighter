@@ -116,7 +116,7 @@ var isHighlight = function (el) {
  * @param {Array} highlights - highlights to flatten.
  * @memberof TextHighlighter
  */
-exports.flattenNestedHighlights = function (highlights) {
+var flattenNestedHighlights = function (highlights) {
     var again;
     // self = this;
     Utils_1.sortByDepth(highlights, true);
@@ -128,14 +128,14 @@ exports.flattenNestedHighlights = function (highlights) {
                 var parentPrev = parent.previousSibling, parentNext = parent.nextSibling;
                 if (isHighlight(parent)) {
                     if (!Utils_1.haveSameColor(parent, hl)) {
-                        if (!hl.nextSibling && parentNext && parent) {
+                        if (!hl.nextSibling && parentNext) {
                             var newLocal = parentNext || parent;
                             if (newLocal) {
                                 Utils_1.dom(hl).insertBefore(newLocal);
                                 again = true;
                             }
                         }
-                        if (!hl.previousSibling) {
+                        if (!hl.previousSibling && parentPrev) {
                             var newLocal = parentPrev || parent;
                             if (newLocal) {
                                 Utils_1.dom(hl).insertAfter(newLocal);
@@ -161,13 +161,14 @@ exports.flattenNestedHighlights = function (highlights) {
         again = flattenOnce();
     } while (again);
 };
+exports.flattenNestedHighlights = flattenNestedHighlights;
 /**
  * Merges sibling highlights and normalizes descendant text nodes.
  * Note: this method changes input highlights - their order and number after calling this method may change.
  * @param highlights
  * @memberof TextHighlighter
  */
-exports.mergeSiblingHighlights = function (highlights) {
+var mergeSiblingHighlights = function (highlights) {
     //   const self = this;
     var shouldMerge = function (current, node) {
         return (node &&
@@ -192,6 +193,7 @@ exports.mergeSiblingHighlights = function (highlights) {
         Utils_1.dom(highlight).normalizeTextNodes();
     });
 };
+exports.mergeSiblingHighlights = mergeSiblingHighlights;
 /**
  * Normalizes highlights. Ensures that highlighting is done with use of the smallest possible number of
  * wrapping HTML elements.
@@ -201,7 +203,7 @@ exports.mergeSiblingHighlights = function (highlights) {
  * input highlights.
  * @memberof TextHighlighter
  */
-exports.normalizeHighlights = function (highlights) {
+var normalizeHighlights = function (highlights) {
     var normalizedHighlights;
     exports.flattenNestedHighlights(highlights);
     exports.mergeSiblingHighlights(highlights);
@@ -215,6 +217,7 @@ exports.normalizeHighlights = function (highlights) {
     });
     return normalizedHighlights;
 };
+exports.normalizeHighlights = normalizeHighlights;
 /**
  * highlight selected element
  * @param el
@@ -354,7 +357,7 @@ var deserializeHighlights = function (el, json) {
     return highlights;
 };
 exports.deserializeHighlights = deserializeHighlights;
-exports.find = function (el, text, caseSensitive, options) {
+var find = function (el, text, caseSensitive, options) {
     var wnd = Utils_1.dom(el).getWindow();
     if (wnd) {
         var scrollX_1 = wnd.scrollX, scrollY_1 = wnd.scrollY, caseSens = (typeof caseSensitive === "undefined" ? true : caseSensitive);
@@ -381,6 +384,7 @@ exports.find = function (el, text, caseSensitive, options) {
         wnd.scrollTo(scrollX_1, scrollY_1);
     }
 };
+exports.find = find;
 /**
  * Returns highlights from given container.
  * @param params
@@ -394,7 +398,7 @@ exports.find = function (el, text, caseSensitive, options) {
  * @returns {Array} - array of highlights.
  * @memberof TextHighlighter
  */
-exports.getHighlights = function (el, params) {
+var getHighlights = function (el, params) {
     if (!params)
         params = new types_1.paramsImp();
     params = Utils_1.defaults(params, {
@@ -414,6 +418,7 @@ exports.getHighlights = function (el, params) {
         return highlights;
     }
 };
+exports.getHighlights = getHighlights;
 /**
  * Serializes all highlights in the element the highlighter is applied to.
  * @returns {string} - stringified JSON with highlights definition
@@ -1074,7 +1079,7 @@ exports.sortByDepth = sortByDepth;
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TextHighlighter = exports.highlightRange = exports.createWrapper = exports.optionsImpl = exports.removeHighlights = exports.serializeHighlights = exports.deserializeHighlights = exports.doHighlight = void 0;
-var Library_1 = require("../src/Library");
+var Library_1 = require("./Library");
 Object.defineProperty(exports, "doHighlight", { enumerable: true, get: function () { return Library_1.doHighlight; } });
 Object.defineProperty(exports, "deserializeHighlights", { enumerable: true, get: function () { return Library_1.deserializeHighlights; } });
 Object.defineProperty(exports, "serializeHighlights", { enumerable: true, get: function () { return Library_1.serializeHighlights; } });
@@ -1086,7 +1091,7 @@ Object.defineProperty(exports, "TextHighlighter", { enumerable: true, get: funct
 var types_1 = require("./types");
 Object.defineProperty(exports, "optionsImpl", { enumerable: true, get: function () { return types_1.optionsImpl; } });
 
-},{"../src/Library":2,"./TextHighlighter":3,"./types":6}],6:[function(require,module,exports){
+},{"./Library":2,"./TextHighlighter":3,"./types":6}],6:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.paramsImp = exports.optionsImpl = exports.highlightI = void 0;

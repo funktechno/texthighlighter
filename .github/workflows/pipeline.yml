@@ -6,6 +6,7 @@ on:
   push:
     branches:
     - master # Push events on master branch
+    - dev
 
 # use https://marketplace.visualstudio.com/items?itemName=me-dutour-mathieu.vscode-github-actions to validate yml in vscode
 # env:
