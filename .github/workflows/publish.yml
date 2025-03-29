@@ -19,7 +19,7 @@ jobs:
       - run: yarn install
       - run: npm run test
       - name: upload junit
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v4
         with:
           name: junit
           path: junit.xml
