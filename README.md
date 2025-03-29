@@ -58,11 +58,12 @@ var methods = {
 * [Simple demo](http://funktechno.github.io/texthighlighter/demos/simple.html)
 * [Callbacks](http://funktechno.github.io/texthighlighter/demos/callbacks.html)
 * [Serialization](http://funktechno.github.io/texthighlighter/demos/serialization.html)
-* [Iframe](http://funktechno.github.io/texthighlighter/demos/iframe.html)
 
 ## development
 * `npm install` or `yarn import`
 * `npm run build`
+* `npm run build:client`
+* `npm run lint:fix`
 * `yarn run live-server` 
 
 ## deploy
